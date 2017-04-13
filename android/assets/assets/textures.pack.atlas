@@ -1,0 +1,264 @@
+
+textures.pack.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+duzykosmita
+  rotate: false
+  xy: 1004, 507
+  size: 504, 626
+  orig: 504, 626
+  offset: 0, 0
+  index: -1
+kamien3
+  rotate: false
+  xy: 1510, 538
+  size: 518, 215
+  orig: 518, 215
+  offset: 0, 0
+  index: -1
+koniec
+  rotate: false
+  xy: 1204, 1235
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+kosmita1
+  rotate: false
+  xy: 1004, 126
+  size: 528, 379
+  orig: 528, 379
+  offset: 0, 0
+  index: -1
+niebo
+  rotate: false
+  xy: 2, 1135
+  size: 1200, 900
+  orig: 1200, 900
+  offset: 0, 0
+  index: -1
+przejscie
+  rotate: false
+  xy: 1510, 755
+  size: 499, 478
+  orig: 499, 478
+  offset: 0, 0
+  index: -1
+restart
+  rotate: false
+  xy: 2, 40
+  size: 141, 91
+  orig: 141, 91
+  offset: 0, 0
+  index: -1
+ruch1
+  rotate: false
+  xy: 1534, 160
+  size: 508, 376
+  orig: 508, 376
+  offset: 0, 0
+  index: -1
+serce
+  rotate: false
+  xy: 145, 81
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+tloCenter
+  rotate: false
+  xy: 2, 133
+  size: 1000, 1000
+  orig: 1000, 1000
+  offset: 0, 0
+  index: -1
+wegiel1
+  rotate: false
+  xy: 1534, 2
+  size: 504, 156
+  orig: 504, 156
+  offset: 0, 0
+  index: -1
+wegielPocisk
+  rotate: false
+  xy: 1204, 1144
+  size: 91, 89
+  orig: 91, 89
+  offset: 0, 0
+  index: -1
+
+textures.pack2.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+eksplozja1
+  rotate: false
+  xy: 1749, 1348
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+eksplozja2
+  rotate: false
+  xy: 884, 840
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+eksplozja3
+  rotate: false
+  xy: 1086, 840
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+kamien1
+  rotate: false
+  xy: 906, 1840
+  size: 520, 160
+  orig: 520, 160
+  offset: 0, 0
+  index: -1
+kamien2
+  rotate: false
+  xy: 952, 1344
+  size: 443, 153
+  orig: 443, 153
+  offset: 0, 0
+  index: -1
+kopanie1
+  rotate: false
+  xy: 1397, 1235
+  size: 350, 300
+  orig: 350, 300
+  offset: 0, 0
+  index: -1
+kopanie2
+  rotate: false
+  xy: 532, 1002
+  size: 350, 300
+  orig: 350, 300
+  offset: 0, 0
+  index: -1
+kosmita2
+  rotate: false
+  xy: 2, 923
+  size: 528, 379
+  orig: 528, 379
+  offset: 0, 0
+  index: -1
+kosmita3
+  rotate: false
+  xy: 2, 542
+  size: 528, 379
+  orig: 528, 379
+  offset: 0, 0
+  index: -1
+kosmitaPocisk
+  rotate: false
+  xy: 1338, 1142
+  size: 52, 200
+  orig: 52, 200
+  offset: 0, 0
+  index: -1
+kulka
+  rotate: false
+  xy: 884, 638
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+napis
+  rotate: false
+  xy: 606, 1365
+  size: 344, 339
+  orig: 344, 339
+  offset: 0, 0
+  index: -1
+napis2
+  rotate: false
+  xy: 952, 1499
+  size: 344, 339
+  orig: 344, 339
+  offset: 0, 0
+  index: -1
+obrazenia1
+  rotate: false
+  xy: 1298, 1537
+  size: 345, 301
+  orig: 345, 301
+  offset: 0, 0
+  index: -1
+obrazenia2
+  rotate: false
+  xy: 1645, 1550
+  size: 345, 301
+  orig: 345, 301
+  offset: 0, 0
+  index: -1
+ruch-rzut
+  rotate: false
+  xy: 2, 164
+  size: 508, 376
+  orig: 508, 376
+  offset: 0, 0
+  index: -1
+spadajacy
+  rotate: false
+  xy: 1236, 1042
+  size: 100, 300
+  orig: 100, 300
+  offset: 0, 0
+  index: -1
+spadanie-rzut
+  rotate: false
+  xy: 884, 1042
+  size: 350, 300
+  orig: 350, 300
+  offset: 0, 0
+  index: -1
+spadanie1
+  rotate: false
+  xy: 532, 700
+  size: 350, 300
+  orig: 350, 300
+  offset: 0, 0
+  index: -1
+tlo
+  rotate: false
+  xy: 2, 2
+  size: 500, 160
+  orig: 500, 160
+  offset: 0, 0
+  index: -1
+trawa
+  rotate: false
+  xy: 532, 548
+  size: 300, 150
+  orig: 300, 150
+  offset: 0, 0
+  index: -1
+wegiel2
+  rotate: false
+  xy: 1428, 1853
+  size: 518, 147
+  orig: 518, 147
+  offset: 0, 0
+  index: -1
+wegiel3
+  rotate: false
+  xy: 2, 1706
+  size: 902, 294
+  orig: 902, 294
+  offset: 0, 0
+  index: -1
+wyjscie
+  rotate: false
+  xy: 2, 1304
+  size: 602, 400
+  orig: 602, 400
+  offset: 0, 0
+  index: -1

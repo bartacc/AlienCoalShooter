@@ -1,0 +1,27 @@
+
+- Background (Textures)
+- Tile (Rectangle with texture + Enum {coal etc.)
+- Player {Vec2 pos, Vec2 velocity} implements InputAdapter {left and right to move + spacebar to shoot CoalMissile}
+- Enemy {Vec2 pos}
+- CoalMissile
+
+
+
+
+Enemy types:
+- Standing, shooting enemy
+- Falling, you need to evade him
+- Moving right and left + shooting
+- Big guy spawning smaller, falling ones
+- Big guy shooting from many different places on his body. You can kill him by targeting these places
+
+
+
+All animations will be stored in a StateMachine List of animations
+
+
+- Move to side (spadanie1 - ruchSpadaniePrzejscie - ruch1)
+- Move from side to center [The same Animation reversed]
+
+- Throw from standing
+- Throw from moving
