@@ -115,6 +115,7 @@ public class Assets implements Disposable, AssetErrorListener
 
         public final TextureRegion heart;
         public final TextureRegion exit;
+        public final TextureRegion exitGate;
 
         public final TextureRegion endPlayer;
         public final TextureRegion endText;
@@ -143,6 +144,7 @@ public class Assets implements Disposable, AssetErrorListener
 
             heart = textureAtlas.findRegion("serce");
             exit = textureAtlas.findRegion("wyjscie");
+            exitGate = textureAtlas.findRegion("drzwi");
 
             endPlayer = textureAtlas.findRegion("koniec");
             endEnemy = textureAtlas.findRegion("duzykosmita");
@@ -231,6 +233,7 @@ public class Assets implements Disposable, AssetErrorListener
         {
             backgroundMusic = assetManager.get(Constants.World.SOUNDS_PATH + "background.mp3", Music.class);
             backgroundMusic.setLooping(true);
+            backgroundMusic.setVolume(0.4f);
 
             coalThrow = assetManager.get(Constants.World.SOUNDS_PATH + "coal-shot.wav", Sound.class);
             enemyThrow = assetManager.get(Constants.World.SOUNDS_PATH + "enemy-shot.ogg", Sound.class);

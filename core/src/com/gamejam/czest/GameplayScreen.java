@@ -25,6 +25,8 @@ public class GameplayScreen implements Screen
     private SpriteBatch spriteBatch;
     private ShapeRenderer shapeRenderer;
 
+    private Outro outro;
+
     private ExtendViewport viewport;
     private HUDoverlay hudOverlay;
 
@@ -42,6 +44,8 @@ public class GameplayScreen implements Screen
         this.shapeRenderer = shapeRenderer;
 
         this.game = game;
+
+        outro = new Outro();
 
         hudOverlay = new HUDoverlay(this);
 
@@ -64,7 +68,7 @@ public class GameplayScreen implements Screen
 
         gameState = GameState.GAMEPLAY;
 
-        enemyPhase = EnemyPhase.L1;
+        enemyPhase = EnemyPhase.L13;
         EnemySpawner.initEnemies(enemyPhase, this, enemies);
 
         Assets.instance.sounds.backgroundMusic.play();
@@ -107,19 +111,20 @@ public class GameplayScreen implements Screen
 
         shapeRenderer.end();
 
-        hudOverlay.render(spriteBatch, player.getCoalAmmo(), player.getLives());
+        if(gameState == GameState.GAMEPLAY)
+            hudOverlay.render(spriteBatch, player.getCoalAmmo(), player.getLives());
     }
 
     public void update(float delta)
     {
         if(gameState == GameState.INTRO) return;
-        if(player.getBounds().x > viewport.getWorldWidth())
-            game.initWinScreen();
+
+        if(gameState == GameState.OUTRO)
+            outro.update(delta);
 
         player.update(delta);
 
-        if(gameState != GameState.OUTRO_STOPPED)
-            background.update(delta);
+        background.update(delta);
 
         for(Missile missile : missiles)
             missile.update(delta);
@@ -149,19 +154,28 @@ public class GameplayScreen implements Screen
 
     private void checkForEndOfPhase()
     {
-        if(enemies.size == 0)
+        if(enemies.size == 0 && missiles.size == 0)
         {
             if(enemyPhase.getNextPhase() == null) return;
 
-            enemyPhase = enemyPhase.getNextPhase();
-            if(enemyPhase == EnemyPhase.OUTRO)
-            {
-                Gdx.app.log(TAG, "Game state is outro");
-                gameState = GameState.OUTRO;
-                background.startOutro();
-            }
-            EnemySpawner.initEnemies(enemyPhase, this, enemies);
+            setPhase(enemyPhase.getNextPhase());
         }
+    }
+
+    public void setPhase(EnemyPhase phase)
+    {
+        enemyPhase = phase;
+        if(enemyPhase == EnemyPhase.OUTRO)
+        {
+            Gdx.app.log(TAG, "Game state is outro");
+            gameState = GameState.OUTRO;
+            outro.startOutro(this);
+        }
+        if(enemyPhase == EnemyPhase.EPILOGUE)
+        {
+            game.initWinScreen();
+        }
+        EnemySpawner.initEnemies(enemyPhase, this, enemies);
     }
 
     public void shootMissile(float centerX, float centerY, float speedY, Missile.Type type)
@@ -231,7 +245,11 @@ public class GameplayScreen implements Screen
         missiles.end();
     }
 
+    public JamGame getGame() {return game;}
+
     public Viewport getViewport() {return viewport;}
+    public Background getBackground() {return background;}
+    public Player getPlayer() {return player;}
 
     @Override
     public void resize(int width, int height)

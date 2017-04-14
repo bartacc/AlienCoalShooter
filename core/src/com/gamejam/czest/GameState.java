@@ -5,5 +5,5 @@ package com.gamejam.czest;
  */
 public enum GameState
 {
-    INTRO, GAMEPLAY, OUTRO, OUTRO_STOPPED;
+    INTRO, GAMEPLAY, OUTRO;
 }

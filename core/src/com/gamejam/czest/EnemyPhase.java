@@ -58,7 +58,16 @@ public enum EnemyPhase
             new EnemyDef().initFalling(0.80f, 0.75f, 0.6f),
             new EnemyDef().initFalling(0.95f, 0.85f, 0.1f),
             new EnemyDef().initIdleShooting(0.5f, 0.92f)),
-    OUTRO();
+
+    OUTRO(new EnemyDef().initFalling(0.05f, 0.85f, 0.1f),
+            new EnemyDef().initFalling(0.20f, 0.75f, 0.6f),
+            new EnemyDef().initFalling(0.35f, 0.65f, 1.1f),
+            new EnemyDef().initFalling(0.5f, 0.55f, 1.6f),
+            new EnemyDef().initFalling(0.65f, 0.65f, 1.1f),
+            new EnemyDef().initFalling(0.80f, 0.75f, 0.6f),
+            new EnemyDef().initFalling(0.95f, 0.85f, 0.1f)),
+
+    EPILOGUE();
 
 
     public final EnemyDef[] enemyDefs;
@@ -70,7 +79,6 @@ public enum EnemyPhase
 
     public EnemyPhase getNextPhase()
     {
-        if(this == OUTRO) return null;
         return EnemyPhase.values()[this.ordinal()+1];
     }
 }

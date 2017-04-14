@@ -37,6 +37,8 @@ public class Background
     private int tilesToOmit = 0;
     private boolean spawnedExit;
     private float exitPos;
+    private boolean stopped;
+    private float doorYpos;
 
     public Background(Player player, ExtendViewport viewport)
     {
@@ -64,6 +66,7 @@ public class Background
         skyYPos = Constants.SideTile.HEIGHT - Constants.Background.SPACE_BETWEEN_GRASS_AND_CENTER_BACKGROUND;;
 
         spawnedExit = false;
+        stopped = false;
     }
 
     private void addTilesBelowScreen()
@@ -99,9 +102,9 @@ public class Background
         }
     }
 
-    public void startOutro()
+    public void spawnExit()
     {
-        exitPos = rightTiles.peek().getBounds().y - Constants.SideTile.HEIGHT * 3f;
+        exitPos = rightTiles.peek().getBounds().y - Constants.SideTile.HEIGHT * Constants.Background.EXIT_HEIGHT;
         spawnedExit = true;
     }
 
@@ -156,11 +159,22 @@ public class Background
             skyYPos += Constants.SideTile.FALL_SPEED * delta;
         }
 
+        if(stopped)
+        {
+            if(doorYpos > exitPos)
+                doorYpos -= Constants.Background.DOOR_VELOCITY * delta;
+            else doorYpos = exitPos;
+            return;
+        }
+
         if(spawnedExit)
         {
             exitPos += Constants.SideTile.FALL_SPEED * delta;
             if(exitPos >= Constants.Background.EXIT_POS)
-                GameplayScreen.gameState = GameState.OUTRO_STOPPED;
+            {
+                doorYpos = exitPos + Constants.SideTile.HEIGHT * Constants.Background.EXIT_HEIGHT;
+                stopped = true;
+            }
         }
 
         for(SideTile tile : leftTiles)
@@ -201,10 +215,27 @@ public class Background
 
     }
 
+    public boolean isDoorClosed()
+    {
+        return spawnedExit && stopped && doorYpos == exitPos;
+    }
+
     public void render(SpriteBatch spriteBatch)
     {
         for(Vector2 backgroundPos : backgroundPositions)
             spriteBatch.draw(Assets.instance.tiles.centerBackground, backgroundPos.x, backgroundPos.y, backgroundTileSize, backgroundTileSize);
+
+
+        if(spawnedExit)
+        {
+            spriteBatch.draw(Assets.instance.tiles.exit, viewport.getWorldWidth() - Constants.SideTile.WIDTH,
+                    exitPos, Constants.SideTile.WIDTH, Constants.SideTile.HEIGHT * Constants.Background.EXIT_HEIGHT);
+        }
+        if(stopped)
+        {
+            spriteBatch.draw(Assets.instance.tiles.exitGate, viewport.getWorldWidth() - Constants.SideTile.WIDTH,
+                    doorYpos, Constants.Background.DOOR_WIDTH, Constants.Background.DOOR_HEIGHT);
+        }
 
         for(SideTile tile : leftTiles)
             tile.render(spriteBatch);
@@ -217,13 +248,6 @@ public class Background
 
         spriteBatch.draw(Assets.instance.tiles.dirt, 0, grassTilesYpos[0], Constants.SideTile.WIDTH, Constants.SideTile.HEIGHT);
         spriteBatch.draw(Assets.instance.tiles.dirt, viewport.getWorldWidth() - Constants.SideTile.WIDTH, grassTilesYpos[1], Constants.SideTile.WIDTH, Constants.SideTile.HEIGHT);
-
-
-        if(spawnedExit)
-        {
-            spriteBatch.draw(Assets.instance.tiles.exit, viewport.getWorldWidth() - Constants.SideTile.WIDTH,
-                    exitPos, Constants.SideTile.WIDTH, Constants.SideTile.HEIGHT * 3);
-        }
     }
 
     public void render(ShapeRenderer shapeRenderer)

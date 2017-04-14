@@ -94,6 +94,13 @@ size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+drzwi
+  rotate: false
+  xy: 1086, 638
+  size: 50, 200
+  orig: 50, 200
+  offset: 0, 0
+  index: -1
 eksplozja1
   rotate: false
   xy: 1749, 1348

@@ -24,6 +24,11 @@ public class Constants
         public static final float SPACE_BETWEEN_GRASS_AND_CENTER_BACKGROUND = 0.5f;
 
         public static final float EXIT_POS = 1;
+        public static final int EXIT_HEIGHT = 4;
+
+        public static final float DOOR_VELOCITY = 6;
+        public static final float DOOR_WIDTH = 0.5f;
+        public static final float DOOR_HEIGHT = SideTile.HEIGHT * EXIT_HEIGHT;
     }
 
     public static class UI
@@ -106,7 +111,7 @@ public class Constants
         public static final float WIDTH = 3;
         public static final float HEIGHT = 1.5f;
 
-        public static final float FALL_SPEED = 7f;
+        public static final float FALL_SPEED = 6f;
         public static final float MIN_POSITION_OF_PREV_TILE_TO_SPAWN_NEW_ONE = 0;//-COAL_HEIGHT/2f;
     }
 

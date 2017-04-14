@@ -25,6 +25,7 @@ public class Player extends InputAdapter
 
     private AnimationState animationState;
     private SideTile.Side lastSide;
+    private SideTile.Side queuedMove;
 
     private float recoilVelocity;
 
@@ -63,58 +64,9 @@ public class Player extends InputAdapter
                 Constants.Player.ENEMY_DAMAGE_HITBOX_WIDTH, bounds.height);
     }
 
-    public void update(float delta)
+    private void updateShots()
     {
-        animationState.elapsedTime += delta;
-
-        if(recoilVelocity > 0)
-        {
-            recoilVelocity -= Constants.Player.RECOIL_DEACCELERATION * delta;
-            if(recoilVelocity < 0) recoilVelocity = 0;
-        }
-        else if(recoilVelocity < 0)
-        {
-            recoilVelocity += Constants.Player.RECOIL_DEACCELERATION * delta;
-            if(recoilVelocity > 0) recoilVelocity = 0;
-        }
-
-        if(recoilVelocity != 0)
-            bounds.x += recoilVelocity * delta;
-        else
-        {
-
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            {
-                if(animationState == AnimationState.IDLE_FALLING)
-                {
-                    animationState = AnimationState.SIDE_MOVEMENT;
-                    animationState.elapsedTime = 0;
-                }
-
-                bounds.x -= Constants.Player.MOVE_VELOCITY * delta;
-                lastSide = SideTile.Side.LEFT;
-            }
-            else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            {
-                if(animationState == AnimationState.IDLE_FALLING)
-                {
-                    animationState = AnimationState.SIDE_MOVEMENT;
-                    animationState.elapsedTime = 0;
-                }
-
-                bounds.x += Constants.Player.MOVE_VELOCITY * delta;
-                lastSide = SideTile.Side.RIGHT;
-            }
-            else  if(animationState != AnimationState.IDLE_FALLING &&
-                    animationState.stateAnimation.isAnimationFinished(animationState.elapsedTime))
-            {
-                animationState = AnimationState.IDLE_FALLING;
-                animationState.elapsedTime = 0;
-            }
-        }
-
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && coalAmmo > 0)
+        if(queuedMove == null && Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && coalAmmo > 0)
         {
             screen.shootMissile(bounds.x + bounds.width / 2f,
                     bounds.y + bounds.height / 2f, Constants.Player.SHOT_SPEED,
@@ -133,6 +85,59 @@ public class Player extends InputAdapter
                 animationState.elapsedTime = 0;
             }
         }
+    }
+
+    private void updateRecoil(float delta)
+    {
+        if(recoilVelocity > 0)
+        {
+            recoilVelocity -= Constants.Player.RECOIL_DEACCELERATION * delta;
+            if(recoilVelocity < 0) recoilVelocity = 0;
+        }
+        else if(recoilVelocity < 0)
+        {
+            recoilVelocity += Constants.Player.RECOIL_DEACCELERATION * delta;
+            if(recoilVelocity > 0) recoilVelocity = 0;
+        }
+    }
+
+    private void updateMovement(float delta)
+    {
+        if(recoilVelocity != 0)
+            bounds.x += recoilVelocity * delta;
+        else
+        {
+
+            if(queuedMove != null)
+            {
+                move(queuedMove, delta);
+                queuedMove = null;
+            }
+            else if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+            {
+                move(SideTile.Side.LEFT, delta);
+            }
+            else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+            {
+                move(SideTile.Side.RIGHT, delta);
+            }
+            else  if(animationState != AnimationState.IDLE_FALLING &&
+                    animationState.stateAnimation.isAnimationFinished(animationState.elapsedTime))
+            {
+                animationState = AnimationState.IDLE_FALLING;
+                animationState.elapsedTime = 0;
+            }
+        }
+    }
+
+    public void update(float delta)
+    {
+        animationState.elapsedTime += delta;
+
+        updateShots();
+        updateRecoil(delta);
+        updateMovement(delta);
+
 
         if(animationState != AnimationState.IDLE_FALLING && animationState != AnimationState.SIDE_MOVEMENT &&
                 animationState.stateAnimation.isAnimationFinished(animationState.elapsedTime))
@@ -142,6 +147,23 @@ public class Player extends InputAdapter
         }
 
         updateHitboxes();
+    }
+
+    public void queueMove(SideTile.Side direction)
+    {
+        queuedMove = direction;
+    }
+
+    private void move(SideTile.Side direction, float delta)
+    {
+        if(animationState == AnimationState.IDLE_FALLING)
+        {
+            animationState = AnimationState.SIDE_MOVEMENT;
+            animationState.elapsedTime = 0;
+        }
+
+        bounds.x +=  direction.getIntDirection() * (Constants.Player.MOVE_VELOCITY * delta);
+        lastSide = direction;
     }
 
     public void checkLeftTileCollision(SideTile tile)
