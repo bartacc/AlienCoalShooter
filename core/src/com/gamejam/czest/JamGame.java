@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 public class JamGame extends Game
 {
-
 	GameplayScreen gameplayScreen;
 
 	private SpriteBatch spriteBatch;
@@ -24,7 +23,8 @@ public class JamGame extends Game
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setAutoShapeType(true);
 
-		initGameplayScreen();
+		//initGameplayScreen();
+		initWinScreen();
 		//initLoseScreen();
 	}
 
@@ -36,7 +36,8 @@ public class JamGame extends Game
 
 	public void initWinScreen()
 	{
-		WinScreen winScreen = new WinScreen(spriteBatch, new ExtendViewport(Constants.World.VIEWPORT_SIZE, Constants.World.VIEWPORT_SIZE));
+		//WinScreen winScreen = new WinScreen(spriteBatch, new ExtendViewport(Constants.World.VIEWPORT_SIZE, Constants.World.VIEWPORT_SIZE), this);
+		WinScreen winScreen = new WinScreen(spriteBatch, this);
 		setScreen(winScreen);
 	}
 

@@ -4,86 +4,79 @@ size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+credits
+  rotate: false
+  xy: 1510, 681
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
 duzykosmita
   rotate: false
-  xy: 1004, 507
+  xy: 1004, 467
   size: 504, 626
   orig: 504, 626
   offset: 0, 0
   index: -1
-kamien3
-  rotate: false
-  xy: 1510, 538
-  size: 518, 215
-  orig: 518, 215
-  offset: 0, 0
-  index: -1
 koniec
   rotate: false
-  xy: 1204, 1235
+  xy: 1204, 1195
   size: 800, 800
   orig: 800, 800
   offset: 0, 0
   index: -1
 kosmita1
   rotate: false
-  xy: 1004, 126
+  xy: 1004, 86
   size: 528, 379
   orig: 528, 379
   offset: 0, 0
   index: -1
 niebo
   rotate: false
-  xy: 2, 1135
+  xy: 2, 1095
   size: 1200, 900
   orig: 1200, 900
   offset: 0, 0
   index: -1
-przejscie
-  rotate: false
-  xy: 1510, 755
-  size: 499, 478
-  orig: 499, 478
-  offset: 0, 0
-  index: -1
 restart
   rotate: false
-  xy: 2, 40
+  xy: 1204, 1102
   size: 141, 91
   orig: 141, 91
   offset: 0, 0
   index: -1
-ruch1
-  rotate: false
-  xy: 1534, 160
-  size: 508, 376
-  orig: 508, 376
-  offset: 0, 0
-  index: -1
 serce
   rotate: false
-  xy: 145, 81
+  xy: 1347, 1143
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
+title
+  rotate: false
+  xy: 1534, 167
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
 tloCenter
   rotate: false
-  xy: 2, 133
+  xy: 2, 93
   size: 1000, 1000
   orig: 1000, 1000
   offset: 0, 0
   index: -1
 wegiel1
   rotate: false
-  xy: 1534, 2
+  xy: 1534, 9
   size: 504, 156
   orig: 504, 156
   offset: 0, 0
   index: -1
 wegielPocisk
   rotate: false
-  xy: 1204, 1144
+  xy: 2, 2
   size: 91, 89
   orig: 91, 89
   offset: 0, 0
@@ -96,175 +89,196 @@ filter: Nearest,Nearest
 repeat: none
 drzwi
   rotate: false
-  xy: 1086, 638
+  xy: 1926, 1483
   size: 50, 200
   orig: 50, 200
   offset: 0, 0
   index: -1
 eksplozja1
   rotate: false
-  xy: 1749, 1348
+  xy: 606, 1489
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 eksplozja2
   rotate: false
-  xy: 884, 840
+  xy: 1756, 1190
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 eksplozja3
   rotate: false
-  xy: 1086, 840
+  xy: 1756, 988
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 kamien1
   rotate: false
-  xy: 906, 1840
+  xy: 884, 1447
   size: 520, 160
   orig: 520, 160
   offset: 0, 0
   index: -1
 kamien2
   rotate: false
-  xy: 952, 1344
+  xy: 849, 981
   size: 443, 153
   orig: 443, 153
   offset: 0, 0
   index: -1
+kamien3
+  rotate: false
+  xy: 1406, 1392
+  size: 518, 215
+  orig: 518, 215
+  offset: 0, 0
+  index: -1
 kopanie1
   rotate: false
-  xy: 1397, 1235
+  xy: 532, 2
   size: 350, 300
   orig: 350, 300
   offset: 0, 0
   index: -1
 kopanie2
   rotate: false
-  xy: 532, 1002
+  xy: 878, 679
   size: 350, 300
   orig: 350, 300
   offset: 0, 0
   index: -1
 kosmita2
   rotate: false
-  xy: 2, 923
+  xy: 2, 428
   size: 528, 379
   orig: 528, 379
   offset: 0, 0
   index: -1
 kosmita3
   rotate: false
-  xy: 2, 542
+  xy: 2, 47
   size: 528, 379
   orig: 528, 379
   offset: 0, 0
   index: -1
 kosmitaPocisk
   rotate: false
-  xy: 1338, 1142
+  xy: 808, 1489
   size: 52, 200
   orig: 52, 200
   offset: 0, 0
   index: -1
 kulka
   rotate: false
-  xy: 884, 638
+  xy: 1230, 736
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 napis
   rotate: false
-  xy: 606, 1365
+  xy: 503, 948
   size: 344, 339
   orig: 344, 339
   offset: 0, 0
   index: -1
 napis2
   rotate: false
-  xy: 952, 1499
+  xy: 532, 607
   size: 344, 339
   orig: 344, 339
   offset: 0, 0
   index: -1
 obrazenia1
   rotate: false
-  xy: 1298, 1537
+  xy: 532, 304
   size: 345, 301
   orig: 345, 301
   offset: 0, 0
   index: -1
 obrazenia2
   rotate: false
-  xy: 1645, 1550
+  xy: 884, 74
   size: 345, 301
   orig: 345, 301
   offset: 0, 0
   index: -1
+przejscie
+  rotate: false
+  xy: 2, 809
+  size: 499, 478
+  orig: 499, 478
+  offset: 0, 0
+  index: -1
 ruch-rzut
   rotate: false
-  xy: 2, 164
+  xy: 1416, 1609
+  size: 508, 376
+  orig: 508, 376
+  offset: 0, 0
+  index: -1
+ruch1
+  rotate: false
+  xy: 906, 1609
   size: 508, 376
   orig: 508, 376
   offset: 0, 0
   index: -1
 spadajacy
   rotate: false
-  xy: 1236, 1042
+  xy: 1926, 1685
   size: 100, 300
   orig: 100, 300
   offset: 0, 0
   index: -1
 spadanie-rzut
   rotate: false
-  xy: 884, 1042
+  xy: 1404, 1090
   size: 350, 300
   orig: 350, 300
   offset: 0, 0
   index: -1
 spadanie1
   rotate: false
-  xy: 532, 700
+  xy: 879, 377
   size: 350, 300
   orig: 350, 300
   offset: 0, 0
   index: -1
 tlo
   rotate: false
-  xy: 2, 2
+  xy: 849, 1136
   size: 500, 160
   orig: 500, 160
   offset: 0, 0
   index: -1
 trawa
   rotate: false
-  xy: 532, 548
+  xy: 1294, 938
   size: 300, 150
   orig: 300, 150
   offset: 0, 0
   index: -1
 wegiel2
   rotate: false
-  xy: 1428, 1853
+  xy: 884, 1298
   size: 518, 147
   orig: 518, 147
   offset: 0, 0
   index: -1
 wegiel3
   rotate: false
-  xy: 2, 1706
+  xy: 2, 1691
   size: 902, 294
   orig: 902, 294
   offset: 0, 0
   index: -1
 wyjscie
   rotate: false
-  xy: 2, 1304
+  xy: 2, 1289
   size: 602, 400
   orig: 602, 400
   offset: 0, 0

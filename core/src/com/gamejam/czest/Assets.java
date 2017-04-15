@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.BitmapFontLoader;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
@@ -28,6 +30,7 @@ public class Assets implements Disposable, AssetErrorListener
     public Tiles tiles;
     public Enemies enemies;
     public Player player;
+    public Fonts fonts;
     public Sounds sounds;
 
     public void queueLoading(AssetManager assetManager)
@@ -39,6 +42,12 @@ public class Assets implements Disposable, AssetErrorListener
         assetManager.setErrorListener(this);
 
         assetManager.load(Constants.World.TEXTURE_ATLAS_PATH, TextureAtlas.class);
+
+        BitmapFontLoader.BitmapFontParameter fontParam = new BitmapFontLoader.BitmapFontParameter();
+        fontParam.atlasName = Constants.World.TEXTURE_ATLAS_PATH;
+        assetManager.load(Constants.World.FONTS_PATH + "title.fnt", BitmapFont.class, fontParam);
+        assetManager.load(Constants.World.FONTS_PATH + "credits.fnt", BitmapFont.class, fontParam);
+
         queueSounds(assetManager);
 
         FileHandleResolver resolver = new InternalFileHandleResolver();
@@ -72,6 +81,7 @@ public class Assets implements Disposable, AssetErrorListener
         tiles = new Tiles(atlas);
         enemies = new Enemies(atlas);
         player = new Player(atlas);
+        fonts = new Fonts(assetManager);
         sounds = new Sounds(assetManager);
     }
 
@@ -214,6 +224,23 @@ public class Assets implements Disposable, AssetErrorListener
             TextureRegion mining2 = textureAtlas.findRegion("kopanie2");
             this.mining = new Animation(0.1f, mining1, mining2, mining1);
             this.mining.setPlayMode(Animation.PlayMode.LOOP);
+        }
+    }
+
+    public class Fonts
+    {
+        public final BitmapFont title;
+        public final BitmapFont credits;
+
+        public Fonts(AssetManager assetManager)
+        {
+            title = assetManager.get(Constants.World.FONTS_PATH + "title.fnt", BitmapFont.class);
+            title.getData().markupEnabled = true;
+
+            credits = assetManager.get(Constants.World.FONTS_PATH + "credits.fnt", BitmapFont.class);
+            credits.getData().markupEnabled = true;
+
+            //credits = title;
         }
     }
 

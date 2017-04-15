@@ -1,6 +1,5 @@
 package com.gamejam.czest;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
@@ -20,8 +19,6 @@ public class Outro
     private boolean spawnedExit;
     private float timeToWaitBeforeMovement;
 
-    private boolean spawnedEpilogueEnemies;
-
     public void startOutro(GameplayScreen screen)
     {
         this.screen = screen;
@@ -31,7 +28,6 @@ public class Outro
         this.viewport = screen.getViewport();
 
         spawnedExit = false;
-        spawnedEpilogueEnemies = false;
 
         float exitDstToTravel = Constants.Player.INITIAL_Y_POS + (Constants.SideTile.HEIGHT * Constants.Background.EXIT_HEIGHT);
         float exitTravelDuration = exitDstToTravel / Constants.SideTile.FALL_SPEED;
@@ -53,7 +49,7 @@ public class Outro
         if(timeToWaitBeforeMovement > 0)
         {
             timeToWaitBeforeMovement -= delta;
-            Gdx.app.log(TAG, "Waiting, remaining time: " + timeToWaitBeforeMovement);
+            //Gdx.app.log(TAG, "Waiting, remaining time: " + timeToWaitBeforeMovement);
             return;
         }
 
@@ -64,13 +60,6 @@ public class Outro
         {
             background.spawnExit();
             spawnedExit = true;
-        }
-
-        if(!spawnedEpilogueEnemies && player.getBounds().x > viewport.getWorldWidth())
-        {
-            //screen.setPhase(EnemyPhase.OUTRO);
-            spawnedEpilogueEnemies = true;
-            //screen.getGame().initWinScreen();
         }
     }
 }

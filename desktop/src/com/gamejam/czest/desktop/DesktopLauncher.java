@@ -17,8 +17,8 @@ public class DesktopLauncher {
 		public static void main(String[] arg)
 		{
 			LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-			config.height = 600;//768;
-			config.width = 1000;//1024;
+			config.height = 480;//768;
+			config.width = 800;//1024;
 			//config.fullscreen = true;
 
 

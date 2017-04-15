@@ -11,6 +11,7 @@ public class Constants
     {
         public static final String TEXTURE_ATLAS_PATH = "assets/textures.pack.atlas";
         public static final String SOUNDS_PATH = "sounds/";
+        public static final String FONTS_PATH = "rawTextures/";
 
         public static final Color CLEAR_COLOR = Color.GRAY;
         public static final float VIEWPORT_SIZE = 10;
