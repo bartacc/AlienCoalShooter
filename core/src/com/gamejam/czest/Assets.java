@@ -45,6 +45,7 @@ public class Assets implements Disposable, AssetErrorListener
 
         BitmapFontLoader.BitmapFontParameter fontParam = new BitmapFontLoader.BitmapFontParameter();
         fontParam.atlasName = Constants.World.TEXTURE_ATLAS_PATH;
+        assetManager.load(Constants.World.FONTS_PATH + "titleBig.fnt", BitmapFont.class, fontParam);
         assetManager.load(Constants.World.FONTS_PATH + "title.fnt", BitmapFont.class, fontParam);
         assetManager.load(Constants.World.FONTS_PATH + "credits.fnt", BitmapFont.class, fontParam);
 
@@ -229,18 +230,31 @@ public class Assets implements Disposable, AssetErrorListener
 
     public class Fonts
     {
+        public final BitmapFont titleBig;
         public final BitmapFont title;
+
         public final BitmapFont credits;
+        public final BitmapFont touchTheScreenPrompt;
+        public final BitmapFont introContent;
 
         public Fonts(AssetManager assetManager)
         {
+            titleBig = assetManager.get(Constants.World.FONTS_PATH + "titleBig.fnt", BitmapFont.class);
+            titleBig.getData().markupEnabled = true;
+
             title = assetManager.get(Constants.World.FONTS_PATH + "title.fnt", BitmapFont.class);
             title.getData().markupEnabled = true;
 
             credits = assetManager.get(Constants.World.FONTS_PATH + "credits.fnt", BitmapFont.class);
             credits.getData().markupEnabled = true;
 
-            //credits = title;
+            touchTheScreenPrompt = assetManager.get(Constants.World.FONTS_PATH + "credits.fnt", BitmapFont.class);
+            touchTheScreenPrompt.getData().markupEnabled = true;
+            touchTheScreenPrompt.getData().setScale(0.5f);
+
+            introContent = assetManager.get(Constants.World.FONTS_PATH + "credits.fnt", BitmapFont.class);
+            introContent.getData().markupEnabled = true;
+            introContent.getData().setScale(1f);
         }
     }
 

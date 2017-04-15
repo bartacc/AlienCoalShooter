@@ -89,196 +89,203 @@ filter: Nearest,Nearest
 repeat: none
 drzwi
   rotate: false
-  xy: 1926, 1483
+  xy: 1966, 1709
   size: 50, 200
   orig: 50, 200
   offset: 0, 0
   index: -1
 eksplozja1
   rotate: false
-  xy: 606, 1489
+  xy: 958, 337
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 eksplozja2
   rotate: false
-  xy: 1756, 1190
+  xy: 958, 135
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 eksplozja3
   rotate: false
-  xy: 1756, 988
+  xy: 1507, 178
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 kamien1
   rotate: false
-  xy: 884, 1447
+  xy: 862, 990
   size: 520, 160
   orig: 520, 160
   offset: 0, 0
   index: -1
 kamien2
   rotate: false
-  xy: 849, 981
+  xy: 1382, 835
   size: 443, 153
   orig: 443, 153
   offset: 0, 0
   index: -1
 kamien3
   rotate: false
-  xy: 1406, 1392
+  xy: 2, 2
   size: 518, 215
   orig: 518, 215
   offset: 0, 0
   index: -1
 kopanie1
   rotate: false
-  xy: 532, 2
+  xy: 503, 631
   size: 350, 300
   orig: 350, 300
   offset: 0, 0
   index: -1
 kopanie2
   rotate: false
-  xy: 878, 679
+  xy: 855, 539
   size: 350, 300
   orig: 350, 300
   offset: 0, 0
   index: -1
 kosmita2
   rotate: false
-  xy: 2, 428
+  xy: 906, 1530
   size: 528, 379
   orig: 528, 379
   offset: 0, 0
   index: -1
 kosmita3
   rotate: false
-  xy: 2, 47
+  xy: 1436, 1530
   size: 528, 379
   orig: 528, 379
   offset: 0, 0
   index: -1
 kosmitaPocisk
   rotate: false
-  xy: 808, 1489
+  xy: 522, 17
   size: 52, 200
   orig: 52, 200
   offset: 0, 0
   index: -1
 kulka
   rotate: false
-  xy: 1230, 736
+  xy: 1709, 178
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 napis
   rotate: false
-  xy: 503, 948
+  xy: 516, 1274
   size: 344, 339
   orig: 344, 339
   offset: 0, 0
   index: -1
 napis2
   rotate: false
-  xy: 532, 607
+  xy: 516, 933
   size: 344, 339
   orig: 344, 339
   offset: 0, 0
   index: -1
 obrazenia1
   rotate: false
-  xy: 532, 304
+  xy: 1559, 532
   size: 345, 301
   orig: 345, 301
   offset: 0, 0
   index: -1
 obrazenia2
   rotate: false
-  xy: 884, 74
+  xy: 1160, 230
   size: 345, 301
   orig: 345, 301
   offset: 0, 0
   index: -1
 przejscie
   rotate: false
-  xy: 2, 809
+  xy: 2, 621
   size: 499, 478
   orig: 499, 478
   offset: 0, 0
   index: -1
 ruch-rzut
   rotate: false
-  xy: 1416, 1609
+  xy: 1372, 1152
   size: 508, 376
   orig: 508, 376
   offset: 0, 0
   index: -1
 ruch1
   rotate: false
-  xy: 906, 1609
+  xy: 862, 1152
   size: 508, 376
   orig: 508, 376
   offset: 0, 0
   index: -1
 spadajacy
   rotate: false
-  xy: 1926, 1685
+  xy: 1882, 1228
   size: 100, 300
   orig: 100, 300
   offset: 0, 0
   index: -1
 spadanie-rzut
   rotate: false
-  xy: 1404, 1090
+  xy: 606, 237
   size: 350, 300
   orig: 350, 300
   offset: 0, 0
   index: -1
 spadanie1
   rotate: false
-  xy: 879, 377
+  xy: 1207, 533
   size: 350, 300
   orig: 350, 300
   offset: 0, 0
   index: -1
+titleBig
+  rotate: false
+  xy: 2, 1101
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
 tlo
   rotate: false
-  xy: 849, 1136
+  xy: 1384, 990
   size: 500, 160
   orig: 500, 160
   offset: 0, 0
   index: -1
 trawa
   rotate: false
-  xy: 1294, 938
+  xy: 1507, 380
   size: 300, 150
   orig: 300, 150
   offset: 0, 0
   index: -1
 wegiel2
   rotate: false
-  xy: 884, 1298
+  xy: 862, 841
   size: 518, 147
   orig: 518, 147
   offset: 0, 0
   index: -1
 wegiel3
   rotate: false
-  xy: 2, 1691
+  xy: 2, 1615
   size: 902, 294
   orig: 902, 294
   offset: 0, 0
   index: -1
 wyjscie
   rotate: false
-  xy: 2, 1289
+  xy: 2, 219
   size: 602, 400
   orig: 602, 400
   offset: 0, 0

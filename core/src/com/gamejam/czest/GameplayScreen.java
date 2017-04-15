@@ -25,6 +25,7 @@ public class GameplayScreen implements Screen
     private SpriteBatch spriteBatch;
     private ShapeRenderer shapeRenderer;
 
+    private Intro intro;
     private Outro outro;
 
     private ExtendViewport viewport;
@@ -45,6 +46,7 @@ public class GameplayScreen implements Screen
 
         this.game = game;
 
+        intro = new Intro();
         outro = new Outro();
 
         hudOverlay = new HUDoverlay(this);
@@ -58,17 +60,28 @@ public class GameplayScreen implements Screen
     {
         Gdx.input.setInputProcessor(null);
 
+        intro.init(spriteBatch, this);
+
         viewport = new ExtendViewport(Constants.World.VIEWPORT_SIZE, Constants.World.VIEWPORT_SIZE);
         resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        player = new Player(viewport.getWorldWidth()/2f, Constants.Player.INITIAL_Y_POS, this);
-        Gdx.input.setInputProcessor(player);
-
+        player = new Player(viewport.getWorldWidth() + Constants.Player.WIDTH/2f, Constants.Player.INITIAL_Y_POS, this);
         background = new Background(player, viewport);
 
-        gameState = GameState.GAMEPLAY;
+        gameState = GameState.INTRO;
+    }
 
-        enemyPhase = EnemyPhase.L13;
+    public void initIntroEnemy()
+    {
+        enemyPhase = EnemyPhase.INTRO;
+        EnemySpawner.initEnemies(enemyPhase, this, enemies);
+    }
+
+    private void initGameplay()
+    {
+        Gdx.input.setInputProcessor(player);
+
+        enemyPhase = EnemyPhase.L1;
         EnemySpawner.initEnemies(enemyPhase, this, enemies);
 
         Assets.instance.sounds.backgroundMusic.play();
@@ -91,7 +104,7 @@ public class GameplayScreen implements Screen
         spriteBatch.begin();
 
         background.render(spriteBatch);
-        player.render(spriteBatch);
+        if(player != null) player.render(spriteBatch);
         for(Enemy enemy : enemies)
             enemy.render(spriteBatch);
         for(Missile missile : missiles)
@@ -113,17 +126,33 @@ public class GameplayScreen implements Screen
 
         if(gameState == GameState.GAMEPLAY)
             hudOverlay.render(spriteBatch, player.getCoalAmmo(), player.getLives());
+
+        if(gameState == GameState.INTRO)
+            intro.render();
     }
 
     public void update(float delta)
     {
-        if(gameState == GameState.INTRO) return;
+        if(gameState == GameState.INTRO)
+        {
+            intro.update(delta);
+            if(intro.isIntroFinished())
+            {
+                gameState = GameState.GAMEPLAY;
+                initGameplay();
+            }
+        }
+        else
+        {
+            checkForEndOfPhase();
+        }
 
         if(gameState == GameState.OUTRO)
             outro.update(delta);
 
         player.update(delta);
 
+        if(gameState != GameState.INTRO || intro.isBackgroundAllowedToMove())
         background.update(delta);
 
         for(Missile missile : missiles)
@@ -140,8 +169,6 @@ public class GameplayScreen implements Screen
         checkForOutOfBoundsEnemies();
 
         checkPlayerEnemyCollision();
-
-        checkForEndOfPhase();
     }
 
     private void checkPlayerEnemyCollision()
@@ -178,9 +205,9 @@ public class GameplayScreen implements Screen
         EnemySpawner.initEnemies(enemyPhase, this, enemies);
     }
 
-    public void shootMissile(float centerX, float centerY, float speedY, Missile.Type type)
+    public void shootMissile(float centerX, float centerY, float speedX, float speedY, Missile.Type type)
     {
-        Missile missile = new Missile(centerX, centerY, speedY, type);
+        Missile missile = new Missile(centerX, centerY, speedX, speedY, type);
         missiles.add(missile);
 
         if(type == Missile.Type.ENEMY_MISSILE) Assets.instance.sounds.enemyThrow.play(Constants.Sound.ENEMY_SHOT_VOLUME);

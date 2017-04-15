@@ -31,6 +31,14 @@ public class EnemySpawner
             else if(def.enemyType == Enemy.Type.FALLING)
                 enemy = new EnemyFalling(centerX, centerY, screen, def.timeToStartShake);
 
+            else if(def.enemyType == Enemy.Type.INTRO_ENEMY)
+            {
+                EnemyMoving introEnemy = new EnemyMoving();
+                float x = screen.getViewport().getWorldWidth() + Constants.INTRO.PLAYER_ENEMY_DISTANCE + Constants.Enemy.WIDTH/2f;
+                float y = Constants.Player.INITIAL_Y_POS + Constants.Enemy.HEIGHT/2f;
+                introEnemy.initIntroEnemy(x, y, screen, screen.getViewport().getWorldWidth(), 0, SideTile.Side.LEFT);
+                enemy = introEnemy;
+            }
 
             outArray.add(enemy);
         }

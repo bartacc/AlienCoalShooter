@@ -51,4 +51,18 @@ public class EnemyDef
 
         return this;
     }
+
+    public EnemyDef initIntroEnemy()
+    {
+        playableArenaPercentageX = 1;
+        playableArenaPercentageY = 0.2f;
+
+        enemyType = Enemy.Type.INTRO_ENEMY;
+
+        leftMaxOffset = 1;
+        rightMaxOffset = 0;
+        initialMovementDirection = SideTile.Side.LEFT;
+
+        return this;
+    }
 }

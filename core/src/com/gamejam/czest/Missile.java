@@ -17,26 +17,27 @@ public class Missile
 
     private Type type;
 
-    public Missile(float centerX, float centerY, float speedY, Type type)
+    public Missile(float centerX, float centerY, float speedX, float speedY, Type type)
     {
         bounds = new Rectangle();
         velocity = new Vector2();
 
-        init(centerX, centerY, speedY, type);
+        init(centerX, centerY, speedX, speedY, type);
     }
 
-    public void init(float centerX, float centerY, float speedY, Type type)
+    public void init(float centerX, float centerY, float speedX, float speedY, Type type)
     {
         float width = type.getWidth();
         float height = type.getHeight();
         bounds.set(centerX - width/2f, centerY - height/2f, width, height);
 
-        velocity.set(0, speedY);
+        velocity.set(speedX, speedY);
         this.type = type;
     }
 
     public void update(float delta)
     {
+        bounds.x += velocity.x * delta;
         bounds.y += velocity.y * delta;
 
         if(type == Type.COAL_MISSILE) velocity.y -= Constants.Missile.COAL_MISSILE_DEACCELERATION * delta;

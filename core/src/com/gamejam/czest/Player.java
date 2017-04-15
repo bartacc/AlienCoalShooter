@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * Created by bartek on 08.04.17.
@@ -25,7 +26,9 @@ public class Player extends InputAdapter
 
     private AnimationState animationState;
     private SideTile.Side lastSide;
+
     private SideTile.Side queuedMove;
+    private Vector2 queuedShot;
 
     private float recoilVelocity;
 
@@ -34,6 +37,8 @@ public class Player extends InputAdapter
 
     public Player(float x, float y, GameplayScreen screen)
     {
+        queuedShot = new Vector2();
+
         bounds = new Rectangle();
         wallHitbox = new Rectangle();
         enemyDamageHitbox = new Rectangle();
@@ -66,10 +71,19 @@ public class Player extends InputAdapter
 
     private void updateShots()
     {
-        if(queuedMove == null && Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && coalAmmo > 0)
+        if((screen.gameState == GameState.GAMEPLAY && queuedMove == null && Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && coalAmmo > 0)
+                || (!queuedShot.isZero() && coalAmmo > 0))
         {
+            float speedX = 0;
+            float speedY = Constants.Player.SHOT_SPEED;
+            if(!queuedShot.isZero())
+            {
+                speedX = queuedShot.x;
+                speedY = queuedShot.y;
+                queuedShot.setZero();
+            }
             screen.shootMissile(bounds.x + bounds.width / 2f,
-                    bounds.y + bounds.height / 2f, Constants.Player.SHOT_SPEED,
+                    bounds.y + bounds.height / 2f, speedX, speedY,
                     Missile.Type.COAL_MISSILE);
             coalAmmo--;
             Gdx.app.log(TAG, "Shot coal, ammo: " + coalAmmo);
@@ -113,11 +127,11 @@ public class Player extends InputAdapter
                 move(queuedMove, delta);
                 queuedMove = null;
             }
-            else if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+            else if (screen.gameState == GameState.GAMEPLAY && Gdx.input.isKeyPressed(Input.Keys.LEFT))
             {
                 move(SideTile.Side.LEFT, delta);
             }
-            else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+            else if (screen.gameState == GameState.GAMEPLAY && Gdx.input.isKeyPressed(Input.Keys.RIGHT))
             {
                 move(SideTile.Side.RIGHT, delta);
             }
@@ -153,6 +167,7 @@ public class Player extends InputAdapter
     {
         queuedMove = direction;
     }
+    public void queueShot(float velocityX, float velocityY) {queuedShot.set(velocityX, velocityY);}
 
     private void move(SideTile.Side direction, float delta)
     {

@@ -23,8 +23,8 @@ public class JamGame extends Game
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setAutoShapeType(true);
 
-		//initGameplayScreen();
-		initWinScreen();
+		initGameplayScreen();
+		//initWinScreen();
 		//initLoseScreen();
 	}
 

@@ -5,6 +5,8 @@ package com.gamejam.czest;
  */
 public enum EnemyPhase
 {
+    INTRO(new EnemyDef().initIntroEnemy()),
+
     L1(new EnemyDef().initIdleShooting(0.5f, 0.8f)),
 
     L2(new EnemyDef().initIdleShooting(0.3f, 0.7f),

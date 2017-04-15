@@ -37,6 +37,12 @@ public class WinScreen implements Screen
 
         Viewport viewport = new FitViewport(800, 480);
         stage = new Stage(viewport, spriteBatch);
+    }
+
+    @Override
+    public void show()
+    {
+        stage.clear();
         skin = new Skin();
 
         setUpBackgroundTable();
@@ -95,7 +101,6 @@ public class WinScreen implements Screen
     private Label setUpTitleLabel()
     {
         BitmapFont font = Assets.instance.fonts.title;
-        font.getData().setScale(1f);
         Label.LabelStyle labelStyle = new Label.LabelStyle(font, Color.WHITE);
         Label titleLabel = new Label("You get to live one more day... Maybe.", labelStyle);
 
@@ -141,12 +146,6 @@ public class WinScreen implements Screen
         });
 
         return restartButton;
-    }
-
-    @Override
-    public void show()
-    {
-
     }
 
     @Override

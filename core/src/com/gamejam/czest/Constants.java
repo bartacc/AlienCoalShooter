@@ -32,6 +32,19 @@ public class Constants
         public static final float DOOR_HEIGHT = SideTile.HEIGHT * EXIT_HEIGHT;
     }
 
+    public static class INTRO
+    {
+        public static float PLAYER_ENEMY_DISTANCE = 2;
+        public static float ENEMY_VELOCITY = 5.5f;
+
+        public static float PLAYER_MIN_WORLD_PERCENTAGE_POS_TO_SHOOT = 0.6f;
+
+        public static float COAL_SPEED_X = 4f;
+        public static float COAL_SPEED_Y = 3f;
+
+        public static float INITIAL_DIRT_POS_DST_FROM_0 = 10;
+    }
+
     public static class UI
     {
         //Percentages
@@ -51,7 +64,7 @@ public class Constants
     public static class Player
     {
         public static final int INITIAL_LIVES = 5;
-        public static final int INITIAL_AMMO = 4;
+        public static final int INITIAL_AMMO = 5;
 
         public static final int MAX_AMMO = 5;
         public static final int MAX_LIVES = 5;

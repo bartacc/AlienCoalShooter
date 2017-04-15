@@ -14,12 +14,35 @@ public class EnemyMoving extends Enemy
     private SideTile.Side movementXdirection;
     private SideY movementYdirection;
 
+    private float movementVelocity;
+
+
+    public EnemyMoving()
+    {
+        super();
+    }
 
     public EnemyMoving(float centerX, float centerY, GameplayScreen screen,
                        float leftMaxOffset, float rightMaxOffset, SideTile.Side initialDirection)
     {
         super();
         init(centerX, centerY, screen, leftMaxOffset, rightMaxOffset, initialDirection);
+    }
+
+    public void initIntroEnemy(float centerX, float centerY, GameplayScreen screen,
+                               float leftMaxOffset, float rightMaxOffset, SideTile.Side initialDirection)
+    {
+        super.init(centerX, centerY, screen, Type.INTRO_ENEMY);
+
+        fullLeftXoffset = leftMaxOffset;
+        fullRightXoffset = rightMaxOffset;
+
+        positionXoffset = 0;
+        positionYoffset = 0;
+
+        movementXdirection = initialDirection;
+        movementYdirection = SideY.UP;
+        movementVelocity = Constants.INTRO.ENEMY_VELOCITY;
     }
 
     public void init(float centerX, float centerY, GameplayScreen screen,
@@ -35,6 +58,7 @@ public class EnemyMoving extends Enemy
 
         movementXdirection = initialDirection;
         movementYdirection = SideY.UP;
+        movementVelocity = Constants.Enemy.SIDE_MOVEMENT_VELOCITY;
     }
 
     @Override
@@ -46,15 +70,15 @@ public class EnemyMoving extends Enemy
 
         if(movementXdirection == SideTile.Side.LEFT)
         {
-            positionXoffset -= Constants.Enemy.SIDE_MOVEMENT_VELOCITY * delta;
-            bounds.x -= Constants.Enemy.SIDE_MOVEMENT_VELOCITY * delta;
+            positionXoffset -= movementVelocity * delta;
+            bounds.x -= movementVelocity * delta;
             if(positionXoffset < -fullLeftXoffset)
                 movementXdirection = SideTile.Side.RIGHT;
         }
         else if(movementXdirection == SideTile.Side.RIGHT)
         {
-            positionXoffset += Constants.Enemy.SIDE_MOVEMENT_VELOCITY * delta;
-            bounds.x += Constants.Enemy.SIDE_MOVEMENT_VELOCITY * delta;
+            positionXoffset += movementVelocity * delta;
+            bounds.x += movementVelocity * delta;
             if(positionXoffset > fullRightXoffset)
                 movementXdirection = SideTile.Side.LEFT;
         }

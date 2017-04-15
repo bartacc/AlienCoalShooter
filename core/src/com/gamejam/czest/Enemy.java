@@ -48,9 +48,19 @@ public class Enemy
         targetYPos = centerY - Constants.Enemy.HEIGHT/2f;
         animationElapsedTime = 0;
 
-        bounds.set(centerX - Constants.Enemy.WIDTH/2f,
-                centerY - Constants.Enemy.HEIGHT/2f + Constants.Enemy.ENTERING_ARENA_SPAWN_OFFSET,
-                Constants.Enemy.WIDTH, Constants.Enemy.HEIGHT);
+        if(type != Type.INTRO_ENEMY)
+        {
+            bounds.set(centerX - Constants.Enemy.WIDTH / 2f,
+                    centerY - Constants.Enemy.HEIGHT / 2f + Constants.Enemy.ENTERING_ARENA_SPAWN_OFFSET,
+                    Constants.Enemy.WIDTH, Constants.Enemy.HEIGHT);
+        }
+        else if(type == Type.INTRO_ENEMY)
+        {
+            bounds.set(centerX - Constants.Enemy.WIDTH / 2f,
+                    centerY - Constants.Enemy.HEIGHT / 2f,
+                    Constants.Enemy.WIDTH, Constants.Enemy.HEIGHT);
+            movedToPosition = true;
+        }
 
         if(type == Type.IDLE_SHOOTING || type == Type.MOVING_SHOOTING)
         {
@@ -85,7 +95,8 @@ public class Enemy
                 timeSinceLastShot = 0;
                 timeBetweenShots = Utils.randomFloat(Constants.Enemy.MIN_TIME_BETWEEN_SHOTS, Constants.Enemy.MAX_TIME_BETWEEN_SHOTS);
                 screen.shootMissile(bounds.x + bounds.width / 2f,
-                        bounds.y + bounds.height / 2f, -Utils.randomFloat(Constants.Enemy.MIN_SHOT_SPEED, Constants.Enemy.MAX_SHOT_SPEED),
+                        bounds.y + bounds.height / 2f, 0,
+                        -Utils.randomFloat(Constants.Enemy.MIN_SHOT_SPEED, Constants.Enemy.MAX_SHOT_SPEED),
                         Missile.Type.ENEMY_MISSILE);
             }
         }
@@ -123,7 +134,7 @@ public class Enemy
 
     public enum Type
     {
-        IDLE_SHOOTING, MOVING_SHOOTING, FALLING, EXPLODING;
+        INTRO_ENEMY, IDLE_SHOOTING, MOVING_SHOOTING, FALLING, EXPLODING;
 
         public Animation getAnimation()
         {
@@ -131,6 +142,7 @@ public class Enemy
             {
                 case IDLE_SHOOTING: return Assets.instance.enemies.shootingEnemy;
                 case MOVING_SHOOTING: return Assets.instance.enemies.shootingEnemy;
+                case INTRO_ENEMY: return Assets.instance.enemies.shootingEnemy;
                 case EXPLODING: return Assets.instance.enemies.explosion;
                 default: return Assets.instance.enemies.shootingEnemy;
             }

@@ -19,7 +19,7 @@ public class Background
     public static final String TAG = Background.class.getSimpleName();
 
     private float skyYPos;
-    private float[] grassTilesYpos = {0, 0};
+    private float[] grassTilesYpos;
     private Array<Vector2> backgroundPositions;
     private float backgroundTileSize;
     private float backgroundYVelocity;
@@ -58,12 +58,15 @@ public class Background
 
         fallSpeed = Constants.SideTile.FALL_SPEED;
         backgroundYVelocity = fallSpeed;
-        addTilesBelowScreen();
 
-        float backgroundBottomY = -backgroundTileSize + Constants.SideTile.HEIGHT - Constants.Background.SPACE_BETWEEN_GRASS_AND_CENTER_BACKGROUND;
+        float backgroundBottomY = -backgroundTileSize + Constants.SideTile.HEIGHT - Constants.Background.SPACE_BETWEEN_GRASS_AND_CENTER_BACKGROUND
+                -Constants.INTRO.INITIAL_DIRT_POS_DST_FROM_0;
         spawnBackgroundTile(backgroundBottomY);
 
-        skyYPos = Constants.SideTile.HEIGHT - Constants.Background.SPACE_BETWEEN_GRASS_AND_CENTER_BACKGROUND;;
+        skyYPos = Constants.SideTile.HEIGHT - Constants.Background.SPACE_BETWEEN_GRASS_AND_CENTER_BACKGROUND - Constants.INTRO.INITIAL_DIRT_POS_DST_FROM_0;
+        grassTilesYpos = new float[]{-Constants.INTRO.INITIAL_DIRT_POS_DST_FROM_0, -Constants.INTRO.INITIAL_DIRT_POS_DST_FROM_0};
+
+        addTilesBelowScreen();
 
         spawnedExit = false;
         stopped = false;
@@ -85,7 +88,6 @@ public class Background
                     type = SideTile.Type.Coal;
                 else type = SideTile.Type.Stone;
             }
-            //type = SideTile.Type.Stone;
 
 
             SideTile tile = spawnTileBelowScreen(side, type);
@@ -115,6 +117,10 @@ public class Background
         else centerX = viewport.getWorldWidth() - (Constants.SideTile.WIDTH/2f);
 
         float centerY = - Constants.SideTile.HEIGHT/2f;
+
+        //If it's the first tile, spawn it below grass tile (could be != 0)
+        if(side == LEFT && leftTiles.size == 0) centerY = grassTilesYpos[0] - Constants.SideTile.HEIGHT/2f;
+        else if(side == RIGHT && rightTiles.size == 0) centerY = grassTilesYpos[1] - Constants.SideTile.HEIGHT/2f;
 
         if(side == RIGHT && spawnedExit && tilesToOmit == 0 && !tileBelowExitSpawned)
         {
@@ -151,13 +157,10 @@ public class Background
 
     public void update(float delta)
     {
-        if(GameplayScreen.gameState != GameState.INTRO)
-        {
-            for(int i = 0; i < grassTilesYpos.length; i++)
-                grassTilesYpos[i] += Constants.SideTile.FALL_SPEED * delta;
+        for(int i = 0; i < grassTilesYpos.length; i++)
+            grassTilesYpos[i] += Constants.SideTile.FALL_SPEED * delta;
 
-            skyYPos += Constants.SideTile.FALL_SPEED * delta;
-        }
+        skyYPos += Constants.SideTile.FALL_SPEED * delta;
 
         if(stopped)
         {
@@ -244,7 +247,7 @@ public class Background
             tile.render(spriteBatch);
 
         spriteBatch.draw(Assets.instance.tiles.sky, 0, skyYPos, viewport.getWorldWidth(),
-                viewport.getWorldHeight() - (Constants.Background.SPACE_BETWEEN_GRASS_AND_CENTER_BACKGROUND - Constants.SideTile.HEIGHT));
+                viewport.getWorldHeight() * 2 - (Constants.Background.SPACE_BETWEEN_GRASS_AND_CENTER_BACKGROUND - Constants.SideTile.HEIGHT));
 
         spriteBatch.draw(Assets.instance.tiles.dirt, 0, grassTilesYpos[0], Constants.SideTile.WIDTH, Constants.SideTile.HEIGHT);
         spriteBatch.draw(Assets.instance.tiles.dirt, viewport.getWorldWidth() - Constants.SideTile.WIDTH, grassTilesYpos[1], Constants.SideTile.WIDTH, Constants.SideTile.HEIGHT);
