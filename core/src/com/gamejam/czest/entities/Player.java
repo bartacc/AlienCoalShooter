@@ -1,4 +1,4 @@
-package com.gamejam.czest;
+package com.gamejam.czest.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -10,6 +10,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.gamejam.czest.Assets;
+import com.gamejam.czest.Constants;
+import com.gamejam.czest.GameState;
+import com.gamejam.czest.Utils;
 
 /**
  * Created by bartek on 08.04.17.
@@ -22,7 +26,7 @@ public class Player extends InputAdapter
     private Rectangle wallHitbox;
     private Rectangle enemyDamageHitbox;
 
-    private GameplayScreen screen;
+    private com.gamejam.czest.screens.GameplayScreen screen;
 
     private AnimationState animationState;
     private SideTile.Side lastSide;
@@ -35,7 +39,7 @@ public class Player extends InputAdapter
     private int lives;
     private int coalAmmo;
 
-    public Player(float x, float y, GameplayScreen screen)
+    public Player(float x, float y, com.gamejam.czest.screens.GameplayScreen screen)
     {
         queuedShot = new Vector2();
 
@@ -46,7 +50,7 @@ public class Player extends InputAdapter
         init(x, y, screen);
     }
 
-    public void init(float x, float y, GameplayScreen screen)
+    public void init(float x, float y, com.gamejam.czest.screens.GameplayScreen screen)
     {
         this.screen = screen;
         bounds.set(x - Constants.Player.WIDTH/2f, y - Constants.Player.HEIGHT/2f,
@@ -219,7 +223,7 @@ public class Player extends InputAdapter
         }*/
     }
 
-    public void checkEnemyCollision(Enemy enemy)
+    public void checkEnemyCollision(com.gamejam.czest.enemies.Enemy enemy)
     {
         Rectangle enemyBounds = enemy.getBounds();
 

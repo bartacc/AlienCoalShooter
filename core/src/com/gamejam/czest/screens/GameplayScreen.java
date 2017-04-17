@@ -1,4 +1,4 @@
-package com.gamejam.czest;
+package com.gamejam.czest.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -11,6 +11,17 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gamejam.czest.Assets;
+import com.gamejam.czest.entities.Background;
+import com.gamejam.czest.Constants;
+import com.gamejam.czest.GameState;
+import com.gamejam.czest.Intro;
+import com.gamejam.czest.JamGame;
+import com.gamejam.czest.entities.Missile;
+import com.gamejam.czest.Outro;
+import com.gamejam.czest.entities.Player;
+import com.gamejam.czest.enemies.EnemyPhase;
+import com.gamejam.czest.enemies.EnemySpawner;
 
 /**
  * Created by bartek on 08.04.17.
@@ -31,12 +42,12 @@ public class GameplayScreen implements Screen
     private ExtendViewport viewport;
     private HUDoverlay hudOverlay;
 
-    private EnemyPhase enemyPhase;
+    private com.gamejam.czest.enemies.EnemyPhase enemyPhase;
 
     private Background background;
     private Player player;
     private DelayedRemovalArray<Missile> missiles;
-    private Array<Enemy> enemies;
+    private Array<com.gamejam.czest.enemies.Enemy> enemies;
 
 
     public GameplayScreen(JamGame game, SpriteBatch spriteBatch, ShapeRenderer shapeRenderer)
@@ -52,7 +63,7 @@ public class GameplayScreen implements Screen
         hudOverlay = new HUDoverlay(this);
 
         missiles = new DelayedRemovalArray<Missile>();
-        enemies = new Array<Enemy>();
+        enemies = new Array<com.gamejam.czest.enemies.Enemy>();
     }
 
     @Override
@@ -73,16 +84,16 @@ public class GameplayScreen implements Screen
 
     public void initIntroEnemy()
     {
-        enemyPhase = EnemyPhase.INTRO;
-        EnemySpawner.initEnemies(enemyPhase, this, enemies);
+        enemyPhase = com.gamejam.czest.enemies.EnemyPhase.INTRO;
+        com.gamejam.czest.enemies.EnemySpawner.initEnemies(enemyPhase, this, enemies);
     }
 
     private void initGameplay()
     {
         Gdx.input.setInputProcessor(player);
 
-        enemyPhase = EnemyPhase.L1;
-        EnemySpawner.initEnemies(enemyPhase, this, enemies);
+        enemyPhase = com.gamejam.czest.enemies.EnemyPhase.L1;
+        com.gamejam.czest.enemies.EnemySpawner.initEnemies(enemyPhase, this, enemies);
 
         Assets.instance.sounds.backgroundMusic.play();
     }
@@ -105,7 +116,7 @@ public class GameplayScreen implements Screen
 
         background.render(spriteBatch);
         if(player != null) player.render(spriteBatch);
-        for(Enemy enemy : enemies)
+        for(com.gamejam.czest.enemies.Enemy enemy : enemies)
             enemy.render(spriteBatch);
         for(Missile missile : missiles)
             missile.render(spriteBatch);
@@ -158,7 +169,7 @@ public class GameplayScreen implements Screen
         for(Missile missile : missiles)
             missile.update(delta);
 
-        for(Enemy enemy : enemies)
+        for(com.gamejam.czest.enemies.Enemy enemy : enemies)
             enemy.update(delta);
 
 
@@ -189,10 +200,10 @@ public class GameplayScreen implements Screen
         }
     }
 
-    public void setPhase(EnemyPhase phase)
+    public void setPhase(com.gamejam.czest.enemies.EnemyPhase phase)
     {
         enemyPhase = phase;
-        if(enemyPhase == EnemyPhase.OUTRO)
+        if(enemyPhase == com.gamejam.czest.enemies.EnemyPhase.OUTRO)
         {
             Gdx.app.log(TAG, "Game state is outro");
             gameState = GameState.OUTRO;

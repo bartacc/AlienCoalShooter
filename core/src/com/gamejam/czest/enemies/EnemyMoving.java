@@ -1,4 +1,8 @@
-package com.gamejam.czest;
+package com.gamejam.czest.enemies;
+
+import com.gamejam.czest.Constants;
+import com.gamejam.czest.screens.GameplayScreen;
+import com.gamejam.czest.entities.SideTile;
 
 /**
  * Created by bartek on 12.04.17.

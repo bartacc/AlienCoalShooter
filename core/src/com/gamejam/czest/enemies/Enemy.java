@@ -1,4 +1,4 @@
-package com.gamejam.czest;
+package com.gamejam.czest.enemies;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -6,8 +6,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.gamejam.czest.Assets;
+import com.gamejam.czest.Constants;
+import com.gamejam.czest.screens.GameplayScreen;
+import com.gamejam.czest.entities.Missile;
+import com.gamejam.czest.Utils;
 
-import static com.gamejam.czest.Enemy.Type.EXPLODING;
+import static com.gamejam.czest.enemies.Enemy.Type.EXPLODING;
 
 /**
  * Created by bartek on 08.04.17.

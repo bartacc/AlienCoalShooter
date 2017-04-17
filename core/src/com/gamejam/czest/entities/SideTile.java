@@ -1,9 +1,12 @@
-package com.gamejam.czest;
+package com.gamejam.czest.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.gamejam.czest.Assets;
+import com.gamejam.czest.Constants;
+import com.gamejam.czest.Utils;
 
 /**
  * Created by bartek on 08.04.17.

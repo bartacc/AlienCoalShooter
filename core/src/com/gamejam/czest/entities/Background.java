@@ -1,4 +1,4 @@
-package com.gamejam.czest;
+package com.gamejam.czest.entities;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -7,9 +7,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
-import static com.gamejam.czest.SideTile.Side.LEFT;
-import static com.gamejam.czest.SideTile.Side.RIGHT;
+import com.gamejam.czest.Assets;
+import com.gamejam.czest.Constants;
+import com.gamejam.czest.Utils;
 
 /**
  * Created by bartek on 08.04.17.
@@ -76,8 +76,8 @@ public class Background
     {
         for(int i = 0; i < 2; i++)
         {
-            SideTile.Side side = LEFT;
-            if(i == 1) side = RIGHT;
+            SideTile.Side side = SideTile.Side.LEFT;
+            if(i == 1) side = SideTile.Side.RIGHT;
 
             SideTile.Type type;
             if (side.coalTilesInRow > 0 && side.coalTilesInRow < Constants.SideTile.MIN_COAL_TILES_IN_ROW)
@@ -92,7 +92,7 @@ public class Background
 
             SideTile tile = spawnTileBelowScreen(side, type);
 
-            if(side == LEFT) leftTiles.add(tile);
+            if(side == SideTile.Side.LEFT) leftTiles.add(tile);
             else
             {
                 if(!spawnedExit || tilesToOmit == 0) rightTiles.add(tile);
@@ -113,23 +113,23 @@ public class Background
     private SideTile spawnTileBelowScreen(SideTile.Side side, SideTile.Type type)
     {
         float centerX;
-        if(side == LEFT) centerX = Constants.SideTile.WIDTH/2f;
+        if(side == SideTile.Side.LEFT) centerX = Constants.SideTile.WIDTH/2f;
         else centerX = viewport.getWorldWidth() - (Constants.SideTile.WIDTH/2f);
 
         float centerY = - Constants.SideTile.HEIGHT/2f;
 
         //If it's the first tile, spawn it below grass tile (could be != 0)
-        if(side == LEFT && leftTiles.size == 0) centerY = grassTilesYpos[0] - Constants.SideTile.HEIGHT/2f;
-        else if(side == RIGHT && rightTiles.size == 0) centerY = grassTilesYpos[1] - Constants.SideTile.HEIGHT/2f;
+        if(side == SideTile.Side.LEFT && leftTiles.size == 0) centerY = grassTilesYpos[0] - Constants.SideTile.HEIGHT/2f;
+        else if(side == SideTile.Side.RIGHT && rightTiles.size == 0) centerY = grassTilesYpos[1] - Constants.SideTile.HEIGHT/2f;
 
-        if(side == RIGHT && spawnedExit && tilesToOmit == 0 && !tileBelowExitSpawned)
+        if(side == SideTile.Side.RIGHT && spawnedExit && tilesToOmit == 0 && !tileBelowExitSpawned)
         {
             centerY = exitPos - Constants.SideTile.HEIGHT/2f;
             tileBelowExitSpawned = true;
         }
-        else if((side == LEFT && leftTiles.size > 0) || (side == RIGHT && rightTiles.size > 0))
+        else if((side == SideTile.Side.LEFT && leftTiles.size > 0) || (side == SideTile.Side.RIGHT && rightTiles.size > 0))
         {
-            if (side == LEFT) centerY = leftTiles.peek().getBounds().y - Constants.SideTile.HEIGHT / 2f;
+            if (side == SideTile.Side.LEFT) centerY = leftTiles.peek().getBounds().y - Constants.SideTile.HEIGHT / 2f;
             else centerY = rightTiles.peek().getBounds().y - Constants.SideTile.HEIGHT / 2f;
         }
 

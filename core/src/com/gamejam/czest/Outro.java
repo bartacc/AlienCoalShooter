@@ -1,6 +1,8 @@
 package com.gamejam.czest;
 
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gamejam.czest.entities.Background;
+import com.gamejam.czest.entities.SideTile;
 
 /**
  * Created by bartek on 13.04.17.
@@ -9,9 +11,9 @@ public class Outro
 {
     public final static String TAG = Outro.class.getSimpleName();
 
-    private GameplayScreen screen;
+    private com.gamejam.czest.screens.GameplayScreen screen;
 
-    private Player player;
+    private com.gamejam.czest.entities.Player player;
     private Background background;
     private Viewport viewport;
 
@@ -19,7 +21,7 @@ public class Outro
     private boolean spawnedExit;
     private float timeToWaitBeforeMovement;
 
-    public void startOutro(GameplayScreen screen)
+    public void startOutro(com.gamejam.czest.screens.GameplayScreen screen)
     {
         this.screen = screen;
 

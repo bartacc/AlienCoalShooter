@@ -1,24 +1,26 @@
-package com.gamejam.czest;
+package com.gamejam.czest.screens;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.gamejam.czest.Assets;
+import com.gamejam.czest.Constants;
 
 /**
  * Created by bartek on 08.04.17.
  */
 public class HUDoverlay
 {
-    private GameplayScreen screen;
+    private com.gamejam.czest.screens.GameplayScreen screen;
     private BitmapFont font;
 
-    public HUDoverlay(GameplayScreen screen)
+    public HUDoverlay(com.gamejam.czest.screens.GameplayScreen screen)
     {
         font = new BitmapFont();
         font.getData().setScale(0.09f);
         init(screen);
     }
 
-    public void init(GameplayScreen screen)
+    public void init(com.gamejam.czest.screens.GameplayScreen screen)
     {
         this.screen = screen;
     }

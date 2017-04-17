@@ -1,9 +1,13 @@
-package com.gamejam.czest;
+package com.gamejam.czest.enemies;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.gamejam.czest.Assets;
+import com.gamejam.czest.Constants;
+import com.gamejam.czest.screens.GameplayScreen;
+import com.gamejam.czest.entities.SideTile;
 
 /**
  * Created by bartek on 10.04.17.

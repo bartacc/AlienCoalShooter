@@ -1,4 +1,4 @@
-package com.gamejam.czest;
+package com.gamejam.czest.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -18,24 +18,27 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gamejam.czest.Assets;
+import com.gamejam.czest.JamGame;
 
 /**
  * Created by bartek on 09.04.17.
  */
-public class LoseScreen implements Screen
+public class WinScreen implements Screen
 {
     private JamGame game;
 
     private Stage stage;
     private Skin skin;
 
+    private Color clearColor = new Color(201f/255f, 203f/255f, 198f/255f, 1);
 
-    public LoseScreen(SpriteBatch spriteBatch, JamGame game)
+    public WinScreen(SpriteBatch spriteBatch, final JamGame game)
     {
-        Viewport viewport = new FitViewport(Constants.EndScreen.WIDTH, Constants.EndScreen.HEIGHT);
-        stage = new Stage(viewport, spriteBatch);
-
         this.game = game;
+
+        Viewport viewport = new FitViewport(800, 480);
+        stage = new Stage(viewport, spriteBatch);
     }
 
     @Override
@@ -44,11 +47,10 @@ public class LoseScreen implements Screen
         stage.clear();
         skin = new Skin();
 
-        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.input.setInputProcessor(stage);
-
         setUpBackgroundTable();
         setUpUItable();
+
+        Gdx.input.setInputProcessor(stage);
     }
 
     private void setUpUItable()
@@ -59,13 +61,24 @@ public class LoseScreen implements Screen
         rootTable.setFillParent(true);
         stage.addActor(rootTable);
 
+
+        Table restartCreditsTable = new Table();
+        restartCreditsTable.setRound(false);
+        //restartCreditsTable.setDebug(true);
+        //restartCreditsTable.setFillParent(true);
+
+        //restartCreditsTable.add().expandX();
+        //restartCreditsTable.row();
+        restartCreditsTable.add(setUpCreditsLabel()).expand();
+        restartCreditsTable.row();
+        restartCreditsTable.add(setUpRestartButton()).size(230f, 150f).center().bottom().expandX();
+
         rootTable.center();
         rootTable.add(setUpTitleLabel()).expandY().colspan(2).center();
         //rootTable.add().expand();
         rootTable.row();
-        rootTable.add(setUpEndImage()).expand().size(Constants.EndScreen.END_ENEMY_WIDTH, Constants.EndScreen.END_ENEMY_HEIGHT);
-        //rootTable.row();
-        rootTable.add(setUpRestartButton()).expand().size(230, 150).center();
+        rootTable.add(setUpPlayerImage()).size(400f, 400f).center();
+        rootTable.add(restartCreditsTable).expandX().fill();
         //rootTable.add(setUpRestartButton()).size(4.6f, 3f).center().bottom().expandX();
     }
 
@@ -88,6 +101,31 @@ public class LoseScreen implements Screen
         }
 
         stage.addActor(backgroundTable);
+    }
+
+    private Label setUpTitleLabel()
+    {
+        BitmapFont font = Assets.instance.fonts.title;
+        Label.LabelStyle labelStyle = new Label.LabelStyle(font, Color.WHITE);
+        Label titleLabel = new Label("You get to live one more day... Maybe.", labelStyle);
+
+        return titleLabel;
+    }
+
+    private Label setUpCreditsLabel()
+    {
+        BitmapFont font = Assets.instance.fonts.credits;
+        Label.LabelStyle labelStyle = new Label.LabelStyle(font, Color.WHITE);
+        Label creditsLabel = new Label("Art and Design:\nOla Zawilińska\n\nProgramming and Design:\nBartek Szczeciński\n(@artecgam)", labelStyle);
+        //creditsLabel.setWrap(true);
+        creditsLabel.setAlignment(Align.center);
+        return creditsLabel;
+    }
+
+    private Image setUpPlayerImage()
+    {
+        Image playerWin = new Image(Assets.instance.tiles.endPlayer);
+        return playerWin;
     }
 
     private Button setUpRestartButton()
@@ -115,28 +153,9 @@ public class LoseScreen implements Screen
         return restartButton;
     }
 
-    private Image setUpEndImage()
-    {
-        Image image = new Image(Assets.instance.tiles.endEnemy);
-        image.setSize(Constants.EndScreen.END_ENEMY_WIDTH, Constants.EndScreen.END_ENEMY_HEIGHT);
-        image.setOrigin(Align.center);
-        image.setRotation(90);
-        return image;
-    }
-
-    private Label setUpTitleLabel()
-    {
-        BitmapFont font = Assets.instance.fonts.title;
-        Label.LabelStyle labelStyle = new Label.LabelStyle(font, Color.WHITE);
-        Label titleLabel = new Label("One more human killed by aliens... Whatever.", labelStyle);
-
-        return titleLabel;
-    }
-
     @Override
     public void render(float delta)
     {
-        Color clearColor = Color.GRAY;
         Gdx.gl.glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -147,9 +166,17 @@ public class LoseScreen implements Screen
         viewport.apply();
         spriteBatch.setProjectionMatrix(viewport.getCamera().combined);
 
+        float width = 8;
+        float x = viewport.getWorldWidth() * 0.15f;
+        float y = 1;
+
         spriteBatch.begin();
-        spriteBatch.draw(Assets.instance.tiles.restart, restartButton.x, restartButton.y, restartButton.width, restartButton.height);
-        spriteBatch.draw(Assets.instance.tiles.endEnemy, restartButton.x - 1, restartButton.y + 2.5f, restartButton.width + 2, restartButton.width + 3);
+        spriteBatch.draw(Assets.instance.tiles.endPlayer, x, y, width, width);
+
+        width = 4;
+        x = viewport.getWorldWidth() * 0.6f;
+        y = 1;
+        spriteBatch.draw(Assets.instance.tiles.endText, x, y, width, width);
         spriteBatch.end();
         */
     }
@@ -181,6 +208,7 @@ public class LoseScreen implements Screen
     @Override
     public void dispose()
     {
-
+        stage.dispose();
+        skin.dispose();
     }
 }

@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gamejam.czest.entities.SideTile;
 import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 import com.rafaskoberg.gdx.typinglabel.TypingListener;
 
@@ -22,7 +23,7 @@ import com.rafaskoberg.gdx.typinglabel.TypingListener;
  */
 public class Intro
 {
-    private GameplayScreen screen;
+    private com.gamejam.czest.screens.GameplayScreen screen;
 
     private Stage stage;
     private IntroState state;
@@ -36,7 +37,7 @@ public class Intro
 
     }
 
-    public void init(SpriteBatch spriteBatch, final GameplayScreen screen)
+    public void init(SpriteBatch spriteBatch, final com.gamejam.czest.screens.GameplayScreen screen)
     {
         Assets.instance.sounds.backgroundMusic.stop();
 
@@ -200,7 +201,7 @@ public class Intro
 
         if(state == IntroState.PLAYER_MOVING_LEFT)
         {
-            Player player = screen.getPlayer();
+            com.gamejam.czest.entities.Player player = screen.getPlayer();
             player.queueMove(SideTile.Side.LEFT);
 
             if(!playerShotCoal && player.getBounds().x + player.getBounds().width/2f <= screen.getViewport().getWorldWidth() * Constants.INTRO.PLAYER_MIN_WORLD_PERCENTAGE_POS_TO_SHOOT)

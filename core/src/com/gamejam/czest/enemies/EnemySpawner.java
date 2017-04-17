@@ -1,6 +1,9 @@
-package com.gamejam.czest;
+package com.gamejam.czest.enemies;
 
 import com.badlogic.gdx.utils.Array;
+import com.gamejam.czest.Constants;
+import com.gamejam.czest.screens.GameplayScreen;
+import com.gamejam.czest.entities.SideTile;
 
 /**
  * Created by bartek on 08.04.17.
