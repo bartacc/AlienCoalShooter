@@ -1,33 +1,39 @@
 package com.gamejam.czest;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
  * Created by bartek on 09.04.17.
  */
-public class LoseScreen extends InputAdapter implements Screen
+public class LoseScreen implements Screen
 {
     private JamGame game;
 
-    private SpriteBatch spriteBatch;
-    private Viewport viewport;
-    private com.badlogic.gdx.math.Rectangle restartButton;
+    private Stage stage;
+    private Skin skin;
 
 
-
-    public LoseScreen(SpriteBatch spriteBatch, Viewport viewport, JamGame game)
+    public LoseScreen(SpriteBatch spriteBatch, JamGame game)
     {
-        this.spriteBatch = spriteBatch;
-        this.viewport = viewport;
-
-        restartButton = new com.badlogic.gdx.math.Rectangle();
+        Viewport viewport = new FitViewport(Constants.EndScreen.WIDTH, Constants.EndScreen.HEIGHT);
+        stage = new Stage(viewport, spriteBatch);
 
         this.game = game;
     }
@@ -35,15 +41,96 @@ public class LoseScreen extends InputAdapter implements Screen
     @Override
     public void show()
     {
-        viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.input.setInputProcessor(this);
+        stage.clear();
+        skin = new Skin();
 
-        float width = 4;
-        float height = 2;
-        float x = viewport.getWorldWidth()/2f - width/2f;
-        float y = 0.5f;
+        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Gdx.input.setInputProcessor(stage);
 
-        restartButton.set(x, y, width, height);
+        setUpBackgroundTable();
+        setUpUItable();
+    }
+
+    private void setUpUItable()
+    {
+        Table rootTable = new Table();
+        rootTable.setRound(false);
+        //rootTable.setDebug(true);
+        rootTable.setFillParent(true);
+        stage.addActor(rootTable);
+
+        rootTable.center();
+        rootTable.add(setUpTitleLabel()).expandY().colspan(2).center();
+        //rootTable.add().expand();
+        rootTable.row();
+        rootTable.add(setUpEndImage()).expand().size(Constants.EndScreen.END_ENEMY_WIDTH, Constants.EndScreen.END_ENEMY_HEIGHT);
+        //rootTable.row();
+        rootTable.add(setUpRestartButton()).expand().size(230, 150).center();
+        //rootTable.add(setUpRestartButton()).size(4.6f, 3f).center().bottom().expandX();
+    }
+
+    private void setUpBackgroundTable()
+    {
+        Table backgroundTable = new Table();
+        backgroundTable.setFillParent(true);
+
+        float tileSize = stage.getViewport().getWorldHeight();
+        float worldWidth = stage.getViewport().getWorldWidth();
+        int nrOfBackgroundTiles = (int) Math.ceil(worldWidth / tileSize);
+
+        for(int i = 0; i < nrOfBackgroundTiles; i++)
+        {
+            Image tile = new Image(Assets.instance.tiles.centerBackground);
+            tile.setSize(tileSize, tileSize);
+            tile.setOrigin(Align.center);
+            tile.setRotation(90);
+            backgroundTable.add(tile).size(tileSize);
+        }
+
+        stage.addActor(backgroundTable);
+    }
+
+    private Button setUpRestartButton()
+    {
+        skin.add("buttonImage", Assets.instance.tiles.restart, TextureRegion.class);
+
+        Button.ButtonStyle buttonStyle = new Button.ButtonStyle(
+                skin.newDrawable("buttonImage", Color.WHITE),
+                skin.newDrawable("buttonImage", Color.GRAY),
+                skin.newDrawable("buttonImage")
+        );
+        skin.add("default", buttonStyle);
+
+        Button restartButton = new Button(skin);
+        restartButton.align(Align.center);
+        restartButton.addListener(new ChangeListener()
+        {
+            @Override
+            public void changed(ChangeEvent event, Actor actor)
+            {
+                game.initGameplayScreen();
+            }
+        });
+
+        return restartButton;
+    }
+
+    private Image setUpEndImage()
+    {
+        Image image = new Image(Assets.instance.tiles.endEnemy);
+        image.setSize(Constants.EndScreen.END_ENEMY_WIDTH, Constants.EndScreen.END_ENEMY_HEIGHT);
+        image.setOrigin(Align.center);
+        image.setRotation(90);
+        return image;
+    }
+
+    private Label setUpTitleLabel()
+    {
+        BitmapFont font = Assets.instance.fonts.title;
+        Label.LabelStyle labelStyle = new Label.LabelStyle(font, Color.WHITE);
+        Label titleLabel = new Label("One more human killed by aliens... Whatever.", labelStyle);
+
+        return titleLabel;
     }
 
     @Override
@@ -53,6 +140,10 @@ public class LoseScreen extends InputAdapter implements Screen
         Gdx.gl.glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        stage.act(delta);
+        stage.draw();
+
+        /*
         viewport.apply();
         spriteBatch.setProjectionMatrix(viewport.getCamera().combined);
 
@@ -60,12 +151,13 @@ public class LoseScreen extends InputAdapter implements Screen
         spriteBatch.draw(Assets.instance.tiles.restart, restartButton.x, restartButton.y, restartButton.width, restartButton.height);
         spriteBatch.draw(Assets.instance.tiles.endEnemy, restartButton.x - 1, restartButton.y + 2.5f, restartButton.width + 2, restartButton.width + 3);
         spriteBatch.end();
+        */
     }
 
     @Override
     public void resize(int width, int height)
     {
-        viewport.update(width, height, true);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -90,20 +182,5 @@ public class LoseScreen extends InputAdapter implements Screen
     public void dispose()
     {
 
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button)
-    {
-        Vector2 unProjected = new Vector2(screenX, screenY);
-        viewport.unproject(unProjected);
-
-        if(restartButton.contains(unProjected.x, unProjected.y))
-        {
-            game.initGameplayScreen();
-            return true;
-        }
-
-        return false;
     }
 }

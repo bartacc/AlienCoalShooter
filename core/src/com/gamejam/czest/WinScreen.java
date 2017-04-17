@@ -92,6 +92,9 @@ public class WinScreen implements Screen
         for(int i = 0; i < nrOfBackgroundTiles; i++)
         {
             Image tile = new Image(Assets.instance.tiles.centerBackground);
+            tile.setSize(tileSize, tileSize);
+            tile.setOrigin(Align.center);
+            tile.setRotation(90);
             backgroundTable.add(tile).size(tileSize);
         }
 

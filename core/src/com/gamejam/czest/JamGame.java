@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 public class JamGame extends Game
 {
@@ -43,8 +42,7 @@ public class JamGame extends Game
 
 	public void initLoseScreen()
 	{
-		LoseScreen loseScreen = new LoseScreen(spriteBatch,
-				new ExtendViewport(Constants.World.VIEWPORT_SIZE, Constants.World.VIEWPORT_SIZE), this);
+		LoseScreen loseScreen = new LoseScreen(spriteBatch, this);
 		setScreen(loseScreen);
 	}
 

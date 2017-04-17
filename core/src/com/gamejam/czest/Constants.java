@@ -17,6 +17,16 @@ public class Constants
         public static final float VIEWPORT_SIZE = 10;
     }
 
+    public static class EndScreen
+    {
+        public static final float WIDTH = 800;
+        public static final float HEIGHT = 480;
+
+        public static final float END_ENEMY_WIDTH = 300;
+        public static final float END_ENEMY_HEIGHT = 450;
+    }
+
+
     public static class Background
     {
         public static final float FALL_SPEED = SideTile.FALL_SPEED/2f;

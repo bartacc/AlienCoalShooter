@@ -89,42 +89,42 @@ filter: Nearest,Nearest
 repeat: none
 drzwi
   rotate: false
-  xy: 1966, 1709
+  xy: 522, 17
   size: 50, 200
   orig: 50, 200
   offset: 0, 0
   index: -1
 eksplozja1
   rotate: false
-  xy: 958, 337
+  xy: 606, 507
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 eksplozja2
   rotate: false
-  xy: 958, 135
+  xy: 606, 305
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 eksplozja3
   rotate: false
-  xy: 1507, 178
+  xy: 606, 103
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 kamien1
   rotate: false
-  xy: 862, 990
+  xy: 868, 990
   size: 520, 160
   orig: 520, 160
   offset: 0, 0
   index: -1
 kamien2
   rotate: false
-  xy: 1382, 835
+  xy: 1375, 835
   size: 443, 153
   orig: 443, 153
   offset: 0, 0
@@ -138,14 +138,14 @@ kamien3
   index: -1
 kopanie1
   rotate: false
-  xy: 503, 631
+  xy: 516, 1313
   size: 350, 300
   orig: 350, 300
   offset: 0, 0
   index: -1
 kopanie2
   rotate: false
-  xy: 855, 539
+  xy: 516, 1011
   size: 350, 300
   orig: 350, 300
   offset: 0, 0
@@ -166,42 +166,28 @@ kosmita3
   index: -1
 kosmitaPocisk
   rotate: false
-  xy: 522, 17
+  xy: 1966, 1709
   size: 52, 200
   orig: 52, 200
   offset: 0, 0
   index: -1
 kulka
   rotate: false
-  xy: 1709, 178
+  xy: 808, 185
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
-napis
-  rotate: false
-  xy: 516, 1274
-  size: 344, 339
-  orig: 344, 339
-  offset: 0, 0
-  index: -1
-napis2
-  rotate: false
-  xy: 516, 933
-  size: 344, 339
-  orig: 344, 339
-  offset: 0, 0
-  index: -1
 obrazenia1
   rotate: false
-  xy: 1559, 532
+  xy: 1207, 532
   size: 345, 301
   orig: 345, 301
   offset: 0, 0
   index: -1
 obrazenia2
   rotate: false
-  xy: 1160, 230
+  xy: 1554, 532
   size: 345, 301
   orig: 345, 301
   offset: 0, 0
@@ -215,35 +201,35 @@ przejscie
   index: -1
 ruch-rzut
   rotate: false
-  xy: 1372, 1152
+  xy: 1378, 1152
   size: 508, 376
   orig: 508, 376
   offset: 0, 0
   index: -1
 ruch1
   rotate: false
-  xy: 862, 1152
+  xy: 868, 1152
   size: 508, 376
   orig: 508, 376
   offset: 0, 0
   index: -1
 spadajacy
   rotate: false
-  xy: 1882, 1228
+  xy: 1888, 1228
   size: 100, 300
   orig: 100, 300
   offset: 0, 0
   index: -1
 spadanie-rzut
   rotate: false
-  xy: 606, 237
+  xy: 855, 539
   size: 350, 300
   orig: 350, 300
   offset: 0, 0
   index: -1
 spadanie1
   rotate: false
-  xy: 1207, 533
+  xy: 503, 709
   size: 350, 300
   orig: 350, 300
   offset: 0, 0
@@ -257,21 +243,21 @@ titleBig
   index: -1
 tlo
   rotate: false
-  xy: 1384, 990
+  xy: 1390, 990
   size: 500, 160
   orig: 500, 160
   offset: 0, 0
   index: -1
 trawa
   rotate: false
-  xy: 1507, 380
+  xy: 808, 387
   size: 300, 150
   orig: 300, 150
   offset: 0, 0
   index: -1
 wegiel2
   rotate: false
-  xy: 862, 841
+  xy: 855, 841
   size: 518, 147
   orig: 518, 147
   offset: 0, 0
