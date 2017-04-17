@@ -38,6 +38,8 @@ public class Intro
 
     public void init(SpriteBatch spriteBatch, final GameplayScreen screen)
     {
+        Assets.instance.sounds.backgroundMusic.stop();
+
         this.screen = screen;
         playerShotCoal = false;
 
