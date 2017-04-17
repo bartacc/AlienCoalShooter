@@ -249,7 +249,8 @@ public class GameplayScreen implements Screen
 
             for(int j = 0; j < enemies.size; j++)
             {
-                if(missile.getType() == Missile.Type.COAL_MISSILE &&
+                if(!enemies.get(j).isDestroyed()  &&
+                        missile.getType() == Missile.Type.COAL_MISSILE &&
                         missile.getBounds().overlaps(enemies.get(j).getBounds()))
                 {
                     enemies.get(j).destroyed();

@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
+import static com.gamejam.czest.Enemy.Type.EXPLODING;
+
 /**
  * Created by bartek on 08.04.17.
  */
@@ -122,14 +124,18 @@ public class Enemy
 
     public void destroyed()
     {
-        type = Type.EXPLODING;
+        type = EXPLODING;
         animationElapsedTime = 0;
         Assets.instance.sounds.enemyDestroyed.play();
+    }
+    public boolean isDestroyed()
+    {
+        return type == EXPLODING;
     }
 
     public boolean isReadyForRemoval()
     {
-        return type == Type.EXPLODING && type.getAnimation().isAnimationFinished(animationElapsedTime);
+        return type == EXPLODING && type.getAnimation().isAnimationFinished(animationElapsedTime);
     }
 
     public enum Type
