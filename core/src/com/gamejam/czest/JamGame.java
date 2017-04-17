@@ -5,11 +5,14 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.gamejam.czest.screens.GameplayScreen;
+import com.gamejam.czest.screens.WinScreen;
 import com.gamejam.czest.screens.LoseScreen;
 
 public class JamGame extends Game
 {
-	com.gamejam.czest.screens.GameplayScreen gameplayScreen;
+	GameplayScreen gameplayScreen;
+	WinScreen winScreen;
+	LoseScreen loseScreen;
 
 	private SpriteBatch spriteBatch;
 	private ShapeRenderer shapeRenderer;
@@ -24,6 +27,10 @@ public class JamGame extends Game
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setAutoShapeType(true);
 
+		gameplayScreen = new GameplayScreen(this, spriteBatch, shapeRenderer);
+		winScreen = new WinScreen(spriteBatch, this);
+		loseScreen = new LoseScreen(spriteBatch, this);
+
 		initGameplayScreen();
 		//initWinScreen();
 		//initLoseScreen();
@@ -31,20 +38,17 @@ public class JamGame extends Game
 
 	public void initGameplayScreen()
 	{
-		gameplayScreen = new GameplayScreen(this, spriteBatch, shapeRenderer);
 		setScreen(gameplayScreen);
 	}
 
 	public void initWinScreen()
 	{
 		//WinScreen winScreen = new WinScreen(spriteBatch, new ExtendViewport(Constants.World.VIEWPORT_SIZE, Constants.World.VIEWPORT_SIZE), this);
-		com.gamejam.czest.screens.WinScreen winScreen = new com.gamejam.czest.screens.WinScreen(spriteBatch, this);
 		setScreen(winScreen);
 	}
 
 	public void initLoseScreen()
 	{
-		com.gamejam.czest.screens.LoseScreen loseScreen = new LoseScreen(spriteBatch, this);
 		setScreen(loseScreen);
 	}
 

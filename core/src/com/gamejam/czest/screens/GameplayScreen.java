@@ -12,16 +12,15 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gamejam.czest.Assets;
-import com.gamejam.czest.entities.Background;
 import com.gamejam.czest.Constants;
 import com.gamejam.czest.GameState;
-import com.gamejam.czest.Intro;
 import com.gamejam.czest.JamGame;
-import com.gamejam.czest.entities.Missile;
-import com.gamejam.czest.Outro;
-import com.gamejam.czest.entities.Player;
+import com.gamejam.czest.enemies.Enemy;
 import com.gamejam.czest.enemies.EnemyPhase;
 import com.gamejam.czest.enemies.EnemySpawner;
+import com.gamejam.czest.entities.Background;
+import com.gamejam.czest.entities.Missile;
+import com.gamejam.czest.entities.Player;
 
 /**
  * Created by bartek on 08.04.17.
@@ -47,7 +46,7 @@ public class GameplayScreen implements Screen
     private Background background;
     private Player player;
     private DelayedRemovalArray<Missile> missiles;
-    private Array<com.gamejam.czest.enemies.Enemy> enemies;
+    private Array<Enemy> enemies;
 
 
     public GameplayScreen(JamGame game, SpriteBatch spriteBatch, ShapeRenderer shapeRenderer)
@@ -69,6 +68,7 @@ public class GameplayScreen implements Screen
     @Override
     public void show()
     {
+        clear();
         Gdx.input.setInputProcessor(null);
 
         intro.init(spriteBatch, this);
@@ -82,18 +82,27 @@ public class GameplayScreen implements Screen
         gameState = GameState.INTRO;
     }
 
+    private void clear()
+    {
+        background = null;
+        player = null;
+
+        missiles.clear();
+        enemies.clear();
+    }
+
     public void initIntroEnemy()
     {
-        enemyPhase = com.gamejam.czest.enemies.EnemyPhase.INTRO;
-        com.gamejam.czest.enemies.EnemySpawner.initEnemies(enemyPhase, this, enemies);
+        enemyPhase = EnemyPhase.INTRO;
+        EnemySpawner.initEnemies(enemyPhase, this, enemies);
     }
 
     private void initGameplay()
     {
         Gdx.input.setInputProcessor(player);
 
-        enemyPhase = com.gamejam.czest.enemies.EnemyPhase.L1;
-        com.gamejam.czest.enemies.EnemySpawner.initEnemies(enemyPhase, this, enemies);
+        enemyPhase = EnemyPhase.L1;
+        EnemySpawner.initEnemies(enemyPhase, this, enemies);
 
         Assets.instance.sounds.backgroundMusic.play();
     }

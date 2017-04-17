@@ -7,6 +7,8 @@ import com.gamejam.czest.entities.SideTile;
  */
 public enum EnemyPhase
 {
+    EMPTY(),
+
     INTRO(new EnemyDef().initIntroEnemy()),
 
     L1(new EnemyDef().initIdleShooting(0.5f, 0.8f)),

@@ -57,6 +57,7 @@ public class Assets implements Disposable, AssetErrorListener
     private void queueSounds(AssetManager assetManager)
     {
         assetManager.load(Constants.World.SOUNDS_PATH + "background.mp3", Music.class);
+        assetManager.load(Constants.World.SOUNDS_PATH + "typing.wav", Music.class);
 
         assetManager.load(Constants.World.SOUNDS_PATH + "coal-shot.wav", Sound.class);
         assetManager.load(Constants.World.SOUNDS_PATH + "enemy-shot.ogg", Sound.class);
@@ -261,6 +262,7 @@ public class Assets implements Disposable, AssetErrorListener
     public class Sounds
     {
         public final Music backgroundMusic;
+        public final Music typing;
 
         public final Sound coalThrow;
         public final Sound enemyThrow;
@@ -275,6 +277,8 @@ public class Assets implements Disposable, AssetErrorListener
             backgroundMusic = assetManager.get(Constants.World.SOUNDS_PATH + "background.mp3", Music.class);
             backgroundMusic.setLooping(true);
             backgroundMusic.setVolume(0.4f);
+
+            typing = assetManager.get(Constants.World.SOUNDS_PATH + "typing.wav", Music.class);
 
             coalThrow = assetManager.get(Constants.World.SOUNDS_PATH + "coal-shot.wav", Sound.class);
             enemyThrow = assetManager.get(Constants.World.SOUNDS_PATH + "enemy-shot.ogg", Sound.class);
